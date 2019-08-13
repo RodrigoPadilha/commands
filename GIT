@@ -1,0 +1,65 @@
+# precisa estar no diretório do projeto local
+	git init
+
+# Copiar Arquivos do Servidor
+	git clone http://url_do_meu_projeto Nome_Da_Pastas_Que_Vai_Conter_Os_Arquivos_Clonados
+
+# Adicionar repositório remoto
+	git remote add Nome_Do_Repo Caminho_Do_Repo
+	git remote add orign http://url_do_meu_projeto
+
+# Lista Diretórios remotos
+	git remote
+
+# Lista Diretórios remotos c/ endereço
+	git remote -v
+
+# criar novo branch
+	git checkout -b nome_novo_branch
+
+# exibir lista de branches
+	git branch
+
+# copia todos os arquivos do servidor para o projeto local trocar master pelo nome do branch
+	git pull orign master
+
+# Marca quais arquivos versionar
+	git add nome_dos_arquvos   OU    git add .
+
+# cria versão para os arquivos
+	git commit -m "Meu comentário do commit"
+
+# envia os arquivos para o servidor trocar master pelo nome do branch
+	git push orign master
+
+# Remove alterações feitas em um arquivo (Alterado e não comitado)
+	git checkout --Nome_Do_Arquivo
+
+# Remove arquivos marcados para commit (Alterado e comitado)
+	git reset HEAD Nome_Do_Arquivo
+
+# Desfazer um commit. (Alterado, comitado e enviado com push) Cria um commit 
+que reverte a alteração anterior 
+	git revert hash_de_um_Commit 
+
+# Armazenar alterações em um projeto (sem fazer comite)
+	git stash
+
+# Restaurar arquivos armazenados por STASH
+	git stash pop
+
+
+# Lista todos os comites do projeto
+	git log --online
+
+# Visualizar diferenças entre Commits/branchs/etc
+	git diff commit_A..commit_B
+
+# Listar Tags
+	git tag
+
+# Criar uma TAG
+	git tag -a Nome_Da_Tag -m "Mensagem da TAG"
+	git tag -a release/1.12.3 -m "Lançando nova versão"
+Obs.: A TAG criada precisa ser enviada para um branch
+	git push Nome_Do_Branch Nome_Da_Tag

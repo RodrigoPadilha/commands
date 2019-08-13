@@ -1,0 +1,27 @@
+# Exibe a versão do Docker
+    docker version
+
+# Verifica se o docker está rodando
+    sudo systemctl status docker
+
+# Cria um container e inicia
+    docker run NOME_DA_IMAGEM       // prende o terminal pois o processo do container é iniciado
+    docker run -d NOME_DA_IMAGEM    // cria container e não bloqueia terminal
+
+# Listar containers e informações (ID, Imagem , etc)
+    docker ps       // em execução
+    docker ps -a    // todos criados
+
+# Iniciar container
+    docker start ID_DO_CONTAINER
+
+# Parar um container
+    docker stop ID_DO_CONTAINER
+
+# Acessar terminal de um container 
+    docker start -a -i ID_DO_CONTAINER
+
+# Remover um container 
+    docker rm NOME_DA_IMAGEM
+    docker container prune  // Limpa todos os containers parados
+    docker rmi images ID_DO_CONTAINER

@@ -1,0 +1,87 @@
+React Native
+
+AMBIENTE DE DESENVOLVIMENTO
+
+# JDK 64 bits e JRE 64 bits
+
+# Instalar Node Js (inclui NPM)
+	node-v : verifica se foi instalado com sucesso
+	npm -v : verifica se foi instalado com sucesso
+
+# Android studio
+ 	Viabiliza a geração do executável para o simulador ou dispositivo
+
+# React Native CLI(comand line interface)
+	permite iniciar o projeto com a estrutura para desenv
+	permite executar comando para simular o projeto
+
+	npm install -g react-native-cli : instala o componente do NodeJs react-native-cli
+
+# Atualizar SDK Andriod
+	- SDK Manager (ícone verde com seta azul para baixo)
+		Tools (recomendado instalar as 3 últimas versões)
+		Android x.x.x (recomendado instalar as 4 últimas versões)
+		Extras
+			Android Support Repository
+			Google Play services
+			Google Repository
+
+VARIÁVEIS DE DESENVILVIMENTO
+
+# Path
+	adb : "C:\Users\rodrigp\AppData\Local\Android\SDK\platform-tools"
+# JAVA_HOME
+	java
+
+
+# Incluir Pacote para Linguagem JSX (Sublime) - adiciona a sintaxe para o editor
+	- Instalar
+		Ctrl + Shift + P > Install Package > JSX > Language Definitions JSX Files 
+	- Ativar
+		Menu View > Syntax > Open All With current extemsions... > JSX
+
+# Instalar o ESLint (Sublime) - Plugin para fazer sugestões de correçoes
+	- Acesar a pasta do projeto
+	- npm install -g eslint
+	- Google > package control > Primeiro Link > Install Now > Copiar todo o código
+		-> abrir sublime > View > Show Console > Na parte inferior colocar o bloco de código > Enter
+	- npm install ...					(repetir em cada projeto)
+	- criar arquivo .eslint na raiz 	(repetir em cada projeto)
+		npm install --save-dev eslint-config-rallycoding
+	- colar código ...extends really coding... dentro do arquivo
+		{
+			"extends": "rallycoding"
+		}
+
+# Linter - localizar erros do código fonte (valida os códigos)
+	- Instalar
+		Ctrl + Shift + P > Install Package > sublime linter (plugar o eslinter)
+						 > Install Package > sublime linter-contrib-eslint ()
+
+
+
+CRIAR APP
+
+# Criar diretório e acessar ele
+
+# Criar estrutura de arquivos do react (gera projeto para android)
+	react-native init nome_meu_projeto
+
+# Abrir projeto no AndroidStudio
+
+
+# Refresh ANDROID
+adb shell input text "RR"
+
+
+##########################################################################################
+############### ERROS ####################################################################
+##########################################################################################
+##### ERRO SDK #####
+Create a file called local.properties with this line:
+sdk.dir = /Users/USERNAME/Library/Android/sdk
+
+##### ERRO react native ENOSPC #####
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+
