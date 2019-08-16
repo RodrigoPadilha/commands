@@ -25,3 +25,79 @@
     docker rm NOME_DA_IMAGEM
     docker container prune  // Limpa todos os containers parados
     docker rmi images ID_DO_CONTAINER
+
+
+
+# Efetua mapeamento de portas para o uso externo do container
+    docker run -d -P NOME_DA_IMAGEM  // -P para mapear uma porta aleatória
+
+# Efetua mapeamento de uma porta específica container
+    docker run -d -p 12345:80 NOME_DA_IMAGEM    // -p porta_para_acesso_extern:porta_interna_do_container
+
+# Lista portas mapeadas
+    docker port
+
+# Exibe IP dos containers ativos
+    docker-machine ip
+
+# Nomear um container
+    docker-run -d -P --name meu-container NOME_DA_IMAGEM    // --name é o parametro para setar um nome no container
+
+# Criar Variável de ambiente
+    docker run -d -P -e AUTHOR = "Rodrifo Padilha dos Snatos" NOME_DA_IMAGEM    // -e nome_da_variavel
+
+# Retorna lista de IDs dos containers que estão rodando
+    docker ps -q
+
+# Parar todos os containers que estão rodando
+    docker stop -t 0 $(docker ps -q) // $(algum_comando) executa o que está dentro dos parenteses antes
+
+
+
+
+# Carregar container iniciando no diretório
+    docker run -p 8080:3000 -v "C:\Users\rodrigo\Desktop\miha-pasta:/var/www" -w "/var/www" node npm start // flag w direciona para iniciar em uma pasta específica
+    docker run -p {PORTA:PORTA} -v "{CAMINHO_HOST:CAMINHO_CONTAINER}" -w "{PASTA_QUE_O_CONTAINER_VAI_STARTAR}" {COMANDO_PARA EXECUTAR_NO_CONTAINER}
+    docker run -v "CAMINHO_VOLUME" NOME_DA_IMAGEM   // cria um volume no respectivo caminho do container.
+
+# Interpolando comandos
+    docker run -p 8080:3000 -v "$(pwd):/var/www" -w "/var/www" node npm start // flag w direciona para iniciar em uma pasta específica
+
+# Exibir informações do container
+    docker inspect ?NOME_DO_CONTAINER?
+
+
+
+####################
+#### DOCKERFILE ####
+####################
+ # cria uma imagem a partir de um Dockerfile.
+    docker build -f Dockerfile
+
+# constrói e nomeia uma imagem não-oficial informando o caminho para o Dockerfile.
+    docker build -f CAMINHO_DOCKERFILE/Dockerfile -t NOME_USUARIO/NOME_IMAGEM
+
+# inicia o processo de login no Docker Hub.
+    docker login
+
+ # envia a imagem criada para o Docker Hub.
+    docker push NOME_USUARIO/NOME_IMAGEM
+
+# baixa a imagem desejada do Docker Hub.
+    docker pull NOME_USUARIO/NOME_IMAGEM
+
+#################
+#### NETWORK ####
+#################
+#  Baixar, sem rodar, a imagem desejada do Docker Hub
+    docker pull ubuntu
+    docker pull NOME_USUARIO/NOME_IMAGEM
+
+# mostra o ip atribuído ao container pelo docker (funciona apenas dentro do container).
+    hostname -i
+
+# cria uma rede especificando o driver desejado.
+    docker network create --driver bridge NOME_DA_REDE
+
+# cria um container especificando seu nome e qual rede deverá ser usada.   
+    docker run -it --name NOME_CONTAINER --network NOME_DA_REDE NOME_IMAGEM
