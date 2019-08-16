@@ -1,0 +1,19 @@
+export PATH=$PATH:/Users/username/Library/Android/sdk/platform-tools/
+
+ionic info
+
+adb devices -l
+
+ionic cordova run android --livereload
+
+ionic cordova platform add android
+
+
+
+# Cria APK em modo de debug e roda no dispositivo
+ionic buid android
+ionic cordova run android --device
+
+
+# Exibir Logs do Android LogCat
+adb shell "logcat | grep 'Web Console'"

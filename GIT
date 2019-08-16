@@ -63,3 +63,42 @@ que reverte a alteração anterior
 	git tag -a release/1.12.3 -m "Lançando nova versão"
 Obs.: A TAG criada precisa ser enviada para um branch
 	git push Nome_Do_Branch Nome_Da_Tag
+
+
+
+
+
+
+
+
+
+
+
+### EXEMPLOS
+
+### Merge Develop <=== feature/lista-chassis
+	Faz com que as alterações da feature sejam incluídas no Develop
+	Estando no develop, ele busca as alterações no outro branch e as 	incorpora.
+
+	  502  cd /Users/rodripsa/Projetos/Chassis2 
+	  503  ls
+	  504  git status
+	  505  ls
+	  506  git branch
+	  507  git checkout developer
+	  508  git status
+	  509  git branch
+	  510  git merge feature/lista-chassis
+	  512  git push origin developer
+
+
+Commit
+Branch
+Checkout
+Cherry-pick
+Reset
+Revert
+Rebase
+Merge
+
+Show commands
