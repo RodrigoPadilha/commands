@@ -1,0 +1,48 @@
+CLI Docker = comand line...
+
+Use either docker run or use docker exec with the -i (interactive) flag to keep stdin open and -t to allocate a terminal.
+
+docker exec -i -t marcomob_web_1 /bin/bash
+
+
+Or to run one or many commands:
+docker exec -ti marcomob_web_1 sh -c "echo a && echo b"
+
+_______________________________________________________
+_______________________________________________________
+
+TRADUÇÕES DJANGO
+python3 manage.py compilemessages
+
+________________________________________________________
+
+Make Migrations
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+Reset Migrations / Fake Migrations
+python3 manage.py migrate --fake
+
+No model específico
+python3 manage.py makemigrations --name Check hrmob
+python3 manage.py migrate hrmob
+
+Adding migrations to app específico
+python3 manage.py makemigrations hrmob
+python3 manage.py migrate semob 0002_Check
+
+________________________________________________________
+Reverter Uma Migration 
+Exemplo: 
+# python3 manage.py migrate APP_NAME ID_MIGRATION --fake
+# python3 manage.py migrate fixmob 0026_auto_20190730_1353.py --fake
+________________________________________________________
+
+_______________________________________________________
+Mostra todas as migrations
+python3 manage.py showmigrations
+_______________________________________________________
+
+Limpa histórico e Restat Migrations
+python3 manage.py migrate --fake semob zero
+python3 manage.py migrate --fake-initial

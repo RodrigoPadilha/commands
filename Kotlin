@@ -1,0 +1,8 @@
+
+Lambda
+    val teste = { a: Int, b: Int -> {
+            Log.i("RodrigoTeste","timerIni: $timerIni ${(a+b)}")
+            Log.i("RodrigoTeste","timerIni: $timerIni ${(a+b)}")
+            Log.i("RodrigoTeste","timerIni: $timerIni ${(a+b)}")
+        }
+    }
