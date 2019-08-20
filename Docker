@@ -71,6 +71,8 @@
 ####################
 #### DOCKERFILE ####
 ####################
+    Responsável por criar a imagem de um container Docker, incluindo as configurações de rede e portas, pastas, diretórios, etc. Tabém pode se basear em outra imagem padrão disponível na Docker
+
  # cria uma imagem a partir de um Dockerfile.
     docker build -f Dockerfile
 
@@ -104,12 +106,142 @@
 
 
 
+########################
+#### DOCKER COMPOSE ####
+########################
+    Auxilia a automatização de criação e gerenciamento dos containers. Orquesttração
+    Com um único comando é possívelk , subir os containers, criar load-balance, server arquivos státicos e ligar todos na mesma rede
+
+    # Não é instalado por padrão com o Docker, após instalar é necessário dar as permissões para execução do docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+
+    # Ciar arquivo docker-compose.yml                        
+        version: '3'                                        // setar a versão e usar identação, assim como em Python
+        services:                                           // criar os servives, cada container será um service
+            nginx:  
+                build:                                      // buildar a imagem com base no dockerfile:zxc
+                    dockerfile: ./docker/nginx.dockerfile
+                    context: .                              // PASTA em que o container vai Iniciar
+                image: douglasq/nginx                       // NOME da Imagem
+                container_name: nginx                       // NOME do container
+                ports:                                      // Libera porta e redireciona
+                    - "80:80"
+                networks:                                   // Coloca o container em uma REDE
+                    - production-network
+                depends_on:                                 // Precisa que os serviços/container node2, node2 e node3 tenham sido instanciados antes
+                    - "node1"
+                    - "node2"
+                    - "node3"
+
+            mongodb:                                        // CRIA Container com mongo
+                image: mongo
+                networks: 
+                    - production-network
+
+            node1:
+                build:
+                    dockerfile: ./docker/alura-books.dockerfile
+                    context: .
+                image: douglasq/alura-books
+                container_name: alura-books-1
+                ports:
+                    - "3000"
+                networks: 
+                    - production-network
+                depends_on:                                 // DEPENDE do container "mongodb", ou seja, precisa que este seja criado antes
+                    - "mongodb"
+
+            node2:
+                build:
+                    dockerfile: ./docker/alura-books.dockerfile
+                    context: .
+                image: douglasq/alura-books
+                container_name: alura-books-2
+                ports:
+                    - "3000"
+                networks: 
+                    - production-network
+                depends_on:
+                    - "mongodb"
+
+            node3:
+                build:
+                    dockerfile: ./docker/alura-books.dockerfile
+                    context: .
+                image: douglasq/alura-books
+                container_name: alura-books-3
+                ports:
+                    - "3000"
+                networks: 
+                    - production-network
+                depends_on:
+                    - "mongodb"
+
+        networks: 
+            production-network:
+                driver: bridge
+    
+    # Cria as imagens dos containers
+        docker-conpose build
+    
+    # Starta todos os containers conforme arquivo do Compose
+        docker-compose up
+        docker compose up -d // libera o terminal para digitação
+    
+    # Lista os containers/serviços que estão no ar
+        docker-compose ps
+
+    # Para os containers e remove as imagens
+        docker-compose down
+
+    # Executar PING 
+        docker exec -it nome_do_container ping nome_container_2
+        docker exec -it ip_do_container ping ip_container_2
 
 
 
 
 
+############################################
+#### PRINCIPAIS COMANDOS DO CURSO ALURA ####
+############################################
+Comandos relacionados às informações
+    docker version - exibe a versão do docker que está instalada.
+    docker inspect ID_CONTAINER - retorna diversas informações sobre o container.
+    docker ps - exibe todos os containers em execução no momento.
+    docker ps -a - exibe todos os containers, independentemente de estarem em execução ou não.
 
+Comandos relacionados à execução
+    docker run NOME_DA_IMAGEM - cria um container com a respectiva imagem passada como parâmetro.
+    docker run -it NOME_DA_IMAGEM - conecta o terminal que estamos utilizando com o do container.
+    docker run -d -P --name NOME dockersamples/static-site - ao executar, dá um nome ao container.
+    docker run -d -p 12345:80 dockersamples/static-site - define uma porta específica para ser atribuída à porta 80 do container, neste caso 12345.
+    docker run -v "CAMINHO_VOLUME" NOME_DA_IMAGEM - cria um volume no respectivo caminho do container.
+    docker run -it --name NOME_CONTAINER --network NOME_DA_REDE NOME_IMAGEM - cria um container especificando seu nome e qual rede deverá ser usada.
+
+Comandos relacionados à inicialização/interrupção
+    docker start ID_CONTAINER - inicia o container com id em questão.
+    docker start -a -i ID_CONTAINER - inicia o container com id em questão e integra os terminais, além de permitir interação entre ambos.
+    docker stop ID_CONTAINER - interrompe o container com id em questão.
+
+Comandos relacionados à remoção
+    docker rm ID_CONTAINER - remove o container com id em questão.
+    docker container prune - remove todos os containers que estão parados.
+    docker rmi NOME_DA_IMAGEM - remove a imagem passada como parâmetro.
+
+Comandos relacionados à construção de Dockerfile
+    docker build -f Dockerfile - cria uma imagem a partir de um Dockerfile.
+    docker build -f Dockerfile -t NOME_USUARIO/NOME_IMAGEM - constrói e nomeia uma imagem não-oficial.
+    docker build -f Dockerfile -t NOME_USUARIO/NOME_IMAGEM CAMINHO_DOCKERFILE - constrói e nomeia uma imagem não-oficial informando o caminho para o Dockerfile.
+
+Comandos relacionados ao Docker Hub
+    docker login - inicia o processo de login no Docker Hub.
+    docker push NOME_USUARIO/NOME_IMAGEM - envia a imagem criada para o Docker Hub.
+    docker pull NOME_USUARIO/NOME_IMAGEM - baixa a imagem desejada do Docker Hub.
+
+Comandos relacionados à rede
+    hostname -i - mostra o ip atribuído ao container pelo docker (funciona apenas dentro do container).
+    docker network create --driver bridge NOME_DA_REDE - cria uma rede especificando o driver desejado.
 
 
 
