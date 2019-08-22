@@ -1,0 +1,21 @@
+
+#### Classe A
+        loginViewModel.findCacheCredentials(
+            ::setCredentialsAtView,
+            loginCacheFile
+        )    
+    
+###### Classe B    
+    fun findCacheCredentials(
+        setCredentialsAtView : ( user : String,
+                                 password : String) -> Unit,
+                                 file: FileManagerInterface
+    ) {
+        loginModel = generateClient(
+            user = file.read(key = "user"),
+            password = file.read(key = "password")
+        )
+        if (!loginModel.user.isNullOrEmpty()) {
+            setCredentialsAtView(loginModel.user, loginModel.password)
+        }
+    }
