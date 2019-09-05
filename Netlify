@@ -1,0 +1,16 @@
+https://app.netlify.com/teams/rodrigopadilha/sites
+
+
+Criar Aquivo com o nome de "netlify.toml.txt" na raiz do projeto
+
+Inserir o conteúdo no arquivo:
+    [ build ]
+
+    comando = "npm run build"
+    publish = "/public"
+
+
+New site from Git -> GitHub -> Selecionar o projeto -> Deply site
+
+
+
