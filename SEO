@@ -1,0 +1,21 @@
+Pesquisar palavras chave Curso SEOI e II 
+    KeyWord research
+
+Pesquisa do google Meta Drescriptio e Title (TÓPICO 1)
+    - Titulo é o que aparece em azul na pesquisa do Google, deve conter palavra chava da página e inserido através da tag <Title>
+    - Descrição logo abaixo da url é inserido no html através da tag 
+        <meta name="description" content="Descrição que vai aparecer na pesqusia abaixo da URL + PalavraChave" />
+    - Apenas uma tag <h1> contendo a palavra chave
+    - Caprichar na descrição dos produtos com conteúdo que explore diferentes possibilidades da busca do usuário com palavras Chave e etc
+    - Otimizar as imagens
+        - nome do arquivo vinho-tinto-seco.jpg
+        - descrição com atributo alt="Vinho Tinto Seco - 48,99"
+
+Organização de URL  (TÓPICO 2)
+    - Uma página não pode estar a mais de três cliques 
+    - URL`s concisas, ou seja, direta /produtos/vinhos/secos
+    - sempre usar o mesmo padrão de separador 
+        /vinho-tinto 
+        /vinho_tinto
+
+Sitemaps (TÓPICO 3)
