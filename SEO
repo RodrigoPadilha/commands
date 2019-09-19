@@ -1,6 +1,8 @@
 Pesquisar palavras chave Curso SEOI e II 
     KeyWord research
 
+Como configurar WebMasterTools e Analytics
+
 Pesquisa do google Meta Drescriptio e Title (TÓPICO 1)
     - Titulo é o que aparece em azul na pesquisa do Google, deve conter palavra chava da página e inserido através da tag <Title>
     - Descrição logo abaixo da url é inserido no html através da tag 
@@ -19,3 +21,31 @@ Organização de URL  (TÓPICO 2)
         /vinho_tinto
 
 Sitemaps (TÓPICO 3)
+
+Microformatos
+    - Preço, Avaliação, etc (Analisar a doc. do Google)
+    - Os microformatos são definidos por parâmetros que devem ser incluídos à estrutura do site, DIV, ARTICLE, etc...    
+        - Defir escopo com a propriedade itemscope
+        - Utilizado as tag span com a propriedade itemprop para não alterar o layout do site contendo imagem, preço, score, etc...
+    - Testar esses microformatos através da ferramente de desenvolvedores do Google Structured Data Testing Tool
+
+Sitelinks
+    - Configurar pelo WebMasterTools
+    - Determinado pela quantidade de páginas do site
+
+Links Inválidos
+    - Risoc de páginas inválidas serem indexadas, pelo fato de um link do site apontar para uma página que não é mais válida
+    - Adicionar páginas de erro para redirecionar urls não reconhecida
+    - Ao mudar uma url que ja tenha sido indexadas pelo google (Rota), deve-se implementar um redirect para a nova rota. Isso faz com que o Google não duplique o conteúdo
+    com duas páginas apontando para o mesmo conteúdo
+    - BLOQUEAR páginas para serem indexadas, por exemplo, uma página que é protegida por senha (criar Produto)
+        - Criar robots.txt que contém instruções para os buscadores de como se comportar em relação ao seu site
+        - Verificar que cada buscador possui um user-agent (Robo de busca) * (asterisco)significa todos
+        - Exemplo: 
+            User-agent: *
+            Disallow: /admin
+    - O site precisa ser Mobile Friendly e rápido de carregar (Usar Plugins para detectar lentidão de carregamento do site)
+
+
+    *** Para as alterações esntrarem no ar  é necessário pedir para o 
+    Google Reindexar o site através da ferramenta WebMasterTools. Após algumas horas as alterações devem ser visíveis
