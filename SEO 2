@@ -47,5 +47,25 @@ Links Inválidos
     - O site precisa ser Mobile Friendly e rápido de carregar (Usar Plugins para detectar lentidão de carregamento do site)
 
 
+
+Link building
+    - Outros sites com Autoridade auta com referências para o nosso site
+    - Sites relacionados (com mesmo conteúdo ou semelhante)
+    - Um link de qualidade possui :
+        - Links do topo possui mais importância, do rodapé menos importancia, etc...
+        - Deve aparecer naturalmente no texto (pedaço do texto se torna o link)
+        - Para não atribuir autoridade a um link desconhecido(comentários) usar a propriedade rel do componente <a />
+            <a href = "www.adada.com.br" rel ="nofollow">
+    - Plugin MozBar para o Chrome informa a autoridade da página que está sendo exibida no navegador
+    - Para conseguir um link de uma página importante para o seu site
+        - Pagar uma agência de relações públicas
+        - Blogging de outras pessoas 
+        - Marketing de conteúdo, criar próprio blog com palavras chave linkando para uma parte do seu site
+        - Patrocinar eventos em troca de links para omseu site
+        - Forums Marketing, em discução voc6e coloca um link para o seu site
+        - Refereals/ afiliados, se alguém entrar em um site B através de um link no seu site A, o seu site A ganha muita relevância (Link BOM)
+
+
+
     *** Para as alterações esntrarem no ar  é necessário pedir para o 
     Google Reindexar o site através da ferramenta WebMasterTools. Após algumas horas as alterações devem ser visíveis
