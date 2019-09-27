@@ -33,8 +33,46 @@ Perguntas principais para um bom hankeamento de SEO:
         Quais são so termos que interessam os usuários para que els caiam no site? Vinhos, Vinicolas, Vinho tinto...? Como ele acha o site? Termos, produtos, etc?
 
 
+    O que são as palavras chave? São os termos mais pesqusiados no Google
 
+    Palavra-Chave: Vinho Tindo
+        Title da página poderia ser Vinho Tinto
+        <h1 /> Colcar a palavra chave
+        Na descrição do produto
+        Na URL
 
+    Google Trends: mostra o intresse das pessoas por determinado assuntoe e termo em relação ao tempo
+
+    KeyWord Tools: ferramenta que auxília na busca de termos e palavras chaves
+
+    Nome do domínio é importante para o Hankeamento
+
+    GoogleAnalytcs
+        - analytics.google.com (precisda ter uma conta do google)
+        - Possui lista de Sites
+        - Admin -> Account -> Create new Account -> Site/App
+            - Nome do Site (Dominio Prncipal):  MeuSite
+            - Property (Subdomínio - meusit.com.br blog.meusite.com.br): Meu Site
+            - Url do site: meusite.com.br
+            - Categoria: ???
+            - Timezone: Brasil
+        - Código de rastreio(JS) para colocar em TODAS as páginas do site
+            - Colocar logo após a tag de início do <body> 
+
+    WebMastersTools
+        - É configurado através das opções do GoogleAnalytcs
+            - Aquisition -> Setup WebMasterTools Datasharing -> 
+        - Habilitar nas configurações o acesso ao WebMasterTools
+            - Add site to WebMasterTools -> OK
+            - New Site
+            - www.meusite.com.br
+            - Comprovar que vc é o dono do site (Através do analytcs é mais fácil)
+        - Pode soliciutar a indexação ao Google
+            - Crowl -> Fetch as Google -> Fetch and Render -> Escolher uma das duas opções
+        - Search Trafic 
+            - Mostra pelo que que as pessoas estão pesquisando para chegar até seu site
+            - Links para o seu site
+            - Como as pessoas chegam até os eu site
 
 
 
