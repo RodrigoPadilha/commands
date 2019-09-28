@@ -1,12 +1,30 @@
+##########################
+#### Comandos Básicos ####
+##########################
+
+??? Se não executar o run com a flag -it o container não fica com status iniciado?
+
+docker pull centos                          -> Baixa imagem
+docker run -it centos                       -> gera container
+docker start ID_CONTAINER                   -> inicia container
+docker exec -i -t ID_CONTAINER /bin/bash    -> Acessa terminal após container iniciado (ao sair com Ctrl+D o container continua iniciado )
+docker stop ID_CONTAINER                    -> para container
+docker start ID_CONTAINER -a -i             -> iniciar container e acessa terminal (ao sair com Ctrl+D o container para)
+
+
 # Exibe a versão do Docker
     docker version
 
 # Verifica se o docker está rodando
     sudo systemctl status docker
 
+# Listar Imagens 
+    docker images   
+    
 # Cria um container e inicia
     docker run NOME_DA_IMAGEM       // prende o terminal pois o processo do container é iniciado
     docker run -d NOME_DA_IMAGEM    // cria container e não bloqueia terminal
+
 
 # Listar containers e informações (ID, Imagem , etc)
     docker ps       // em execução
@@ -15,16 +33,21 @@
 # Iniciar container
     docker start ID_DO_CONTAINER
 
+    ** Após executar o run o container vai para o ESTADO de PARADO,
+        o mesmo só fica em execução quando é acessado via modo interativo (Flag -it)
+        para que o estado deste mude é necessário executar o comando:  'docker start ID_CONTAINER'
+
 # Parar um container
     docker stop ID_DO_CONTAINER
 
-# Acessar terminal de um container 
+# Acessar terminal de um container e acessar o terminal do container
     docker start -a -i ID_DO_CONTAINER
 
 # Remover um container 
     docker rm NOME_DA_IMAGEM
     docker container prune  // Limpa todos os containers parados
     docker rmi images ID_DO_CONTAINER
+    
 
 
 
@@ -298,3 +321,11 @@ docker run -d -p 8000:8000 -v $PWD:/code/ marcomob_web
 #https://imasters.com.br/desenvolvimento/obter-shell-no-conteiner-docker-em-execucao
 
 $ docker exec -i -t marcomob_web_1 /bin/bash
+
+
+
+
+
+
+docker run --name meu-site -d -p 80:5000 -v "/home/rodrigo/minha_pasta:/var/www"
+
