@@ -1,0 +1,13 @@
+Instalar Vagrant
+
+Criar arquivo Vagrantfile
+
+Criar "pool" de máquinas virtuais
+    Configurar Rede e portas
+
+
+Instalar Provisionador que atualiza pacotes e instala outros programas
+Através de comandos Vragrant/shell instalar Puppet ou Ansible
+    - Rodar script pp para o Puppet
+
+

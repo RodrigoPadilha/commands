@@ -1,0 +1,4 @@
+sudo apt-get install libmysqlclient-dev
+pip3 install mysqlclient
+
+pip3 install flask_mysqldb==0.2.0

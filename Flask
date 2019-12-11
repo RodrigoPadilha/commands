@@ -1,0 +1,28 @@
+# Instalar pacote versão específica do Flask
+    - pegaria a 0.11.1 que é última versão compatível com a 0.11.0
+    pip3 install flask~=0.11.0
+
+# Criar projeto e iportar apenas as classes necessárias do Flask e não o pacote inteiro,
+isso deixa a aplicação mais rápida
+    from flask import Flask
+
+# Criar um pacote "templpates" para conter as páginas html
+
+# para receber um arequisição e saber o que responder, utilizar a notação Route
+    @app.route('/caminho')
+
+# a resposta deve ser enviada com o comando "render_template(...)" que é importado do flask tbm
+enviar uma página html como parâmetro no lugar de ...
+
+
+
+
+
+??????????????????????????????
+Aula 1 - Flask 
+Se eu quiser usar a porta 8080 para aplicação ou até mesmo permitir acessos externos 
+à aplicação definindo o host como 0.0.0.0 como eu devo proceder?
+    # trecho da app
+    app.run(host='0.0.0.0', port=8080)
+
+    
