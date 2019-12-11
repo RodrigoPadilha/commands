@@ -60,6 +60,8 @@
     docker run -p {PORTA:PORTA} -v "{CAMINHO_HOST:CAMINHO_CONTAINER}" -w "{PASTA_QUE_O_CONTAINER_VAI_STARTAR}" {COMANDO_PARA EXECUTAR_NO_CONTAINER}
     docker run -v "CAMINHO_VOLUME" NOME_DA_IMAGEM   // cria um volume no respectivo caminho do container.
 
+    docker run -p 1234:3000 -v "/Users/rodripsa/Projetos/Exemplos/ApiFotosNode:/usr/src/app" -w "/usr/src/app" -d rodrigo/apiteste npm start
+
 # Interpolando comandos
     docker run -p 8080:3000 -v "$(pwd):/var/www" -w "/var/www" node npm start // flag w direciona para iniciar em uma pasta específica
 

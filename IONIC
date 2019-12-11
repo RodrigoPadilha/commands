@@ -17,3 +17,16 @@ ionic cordova run android --device
 
 # Exibir Logs do Android LogCat
 adb shell "logcat | grep 'Web Console'"
+
+
+
+
+FotosRepository
+I_DESCRIPTION = "Foto criada pelo App Chassis 2.0 - ${fotoModel.nomeImg}",
+
+LoginActivity
+loginFail(getString(R.string.message_list_center_empty))
+
+
+strings.xml
+<string name="message_list_center_empty">Usuário não possui centro.</string>
