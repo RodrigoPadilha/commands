@@ -1,0 +1,25 @@
+Usando o mesmo conceito de "interno", métodos e variáveis internas de uma classe que não devem ser acessados de fora dela, também devem começar com um underscore. 
+Mas isso não os torna privados. Nesse caso, é apenas uma convenção mesmo.
+_*
+
+
+Variáveis ou métodos privados não podem ser acessados de fora da classe 
+Quando variáveis ou métodos com nomes assim são definidos dentro de uma classe, eles são modificados e têm o nome da classe inserido no início
+se você quer criar uma classe e ela tem a possibilidade de ser extendida, não crie métodos nem variáveis iniciados com dois underscores. 
+A não ser que você tenha certeza que eles nunca serão usados nas classes filhas.
+__*
+
+
+Programa:
+    def __init__(self):
+
+    Filme(Programa):
+        def __init__(self):
+            super().__init__(nome, ano)
+            self.temporadas = temporadas
+
+
+    Serie(Programa):
+        def __init__(self):
+            super().__init__(nome, ano)
+            self.temporadas = temporadas
