@@ -9,17 +9,23 @@ se você quer criar uma classe e ela tem a possibilidade de ser extendida, não 
 A não ser que você tenha certeza que eles nunca serão usados nas classes filhas.
 __*
 
-
-Programa:
-    def __init__(self):
-
-    Filme(Programa):
+Herança
+    Programa:
         def __init__(self):
-            super().__init__(nome, ano)
-            self.temporadas = temporadas
+
+        Filme(Programa):
+            def __init__(self):
+                super().__init__(nome, ano)
+                self.temporadas = temporadas
 
 
-    Serie(Programa):
-        def __init__(self):
-            super().__init__(nome, ano)
-            self.temporadas = temporadas
+        Serie(Programa):
+            def __init__(self):
+                super().__init__(nome, ano)
+                self.temporadas = temporadas
+
+Métodos de classe
+    métodos declarados com @classmethod
+
+Métodos estáticos
+    outra forma de criar métodos ligados à classe é com a declaração @staticmethod
