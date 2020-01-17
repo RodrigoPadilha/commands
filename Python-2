@@ -9,6 +9,11 @@ se você quer criar uma classe e ela tem a possibilidade de ser extendida, não 
 A não ser que você tenha certeza que eles nunca serão usados nas classes filhas.
 __*
 
+###########################################################
+    herança, polimorfismo, duck typing e herança múltipla.
+###########################################################
+
+
 Herança
     Programa:
         def __init__(self):
@@ -29,3 +34,12 @@ Métodos de classe
 
 Métodos estáticos
     outra forma de criar métodos ligados à classe é com a declaração @staticmethod
+
+
+
+Interface
+    Obrigar a classe a implementar métodos
+
+Mixim
+    classes pequenas, cujos objetos nem precisam ser instanciados, de Mixins. 
+    Elas são bastante utilizadas em Python no caso de precisarmos compartilhar algum comportamento que não é o mais importante desta classe.
