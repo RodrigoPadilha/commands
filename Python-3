@@ -30,3 +30,54 @@ COLLECTIONS parte 2
             conj_A = { 15, 24, 14, 38 }
             conj_B = { 15, 18, 26, 38 } 
             conj_completo = conj_A ^ conj_B     # { 24, 14, 18 } pega os elemetnos que não estão no conj_A e no conj_B. Estão em apenas um dos dois conjuntos
+
+    Como os conjuntos não tem uma ordem, a inclusão de novos registros não usa o append(que remete a apendice/fim da lista), mas o método add()
+        conj_A.add(13)
+
+        Exemplo de transformação:
+            mensagem = "Rodrigo prefere estudar durante a noite Rodrigo se concentra melhor e estudar faz bem"
+            aux = mensagem.split()          # ['Rodrigo', 'prefere', 'estudar', 'durante', 'a', 'noite', 'Rodrigo', 'se', 'concentra', 'melhor', 'e', 'estudar', 'faz', 'bem']
+            aux = set(mensagem.split())     # {'concentra', 'se', 'durante', 'prefere', 'noite', 'melhor', 'bem', 'a', 'e', 'Rodrigo', 'estudar', 'faz'}
+
+
+    # DICIONÁRIOS - exemlpo clássivo de chave : valor para o dicionário de palavras que possui uma palavra e um significado
+        -> Possui o mesmo formato dos conjuntos, porém possui mais de um valor {'Rodrigo':32, 'Mariana':28}
+        -> O acesso aos atributos pode ser feito:            
+            dicionario['Rodrigo']           # Retona erro quando a chave não é encontrada
+            dicionario.get('Rodrigo','')    # Caso a chave não exista retorna o valor ''
+        
+        -> Add elemento: 
+            dicionario['Julia'] = 7
+
+        -> Editar elemento:
+            dicionario['Julia'] = 6
+
+        -> Remover elemento:
+            del dicionario['Julia']
+
+        -> Verificar se elemento existe:
+            'Julia' in dicionario       # Retorna true ou False
+
+        -> Interar sobre o dicionário usando as chaves:
+            for elem in dicionario:     # Passa pelas chaves do dicionários
+                ...
+
+        -> Interar sobre o dicionário usando os valores:
+            for elem in dicionario.values():     # Passa pelos valores do dicionários
+                ...
+                
+        -> Interar sobre o dicionário usando as linhas(chave/valor):
+            for elem in dicionario.items():     # Passa pelos itens extraindo cada um para uma tupla de tamanho 2 
+                ...
+            for chave, valor in dicionario.items():
+                ...
+                LIST Compreention:
+                ["Chave: {}".format(chave) for chave, valor in dicionario.keys()]       # ['Chave: Rodrigo', 'Chave: Mariana']
+
+
+
+
+        Listas 
+        Tuplas
+        Arrays
+        Conjuntos mutável ou imutável
