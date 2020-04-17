@@ -1,0 +1,153 @@
+Nautilus - > gerenciador de arquivos como o Explorer do windows
+Super+Shift+PageUp
+Super+Shift+PageDown
+
+Flat-Remix
+https://www.osradar.com/install-flat-remix-theme-ubuntu/
+
+/******************\
+    DIRETÓRIOS
+\******************/
+
+# /dev  (devide ou dispositivo)
+    Todos os dispositivos ligados a máquina USB, PenDrivers, CDRooms , etc
+para ler esses dispositivos precisamoas primeiro montar em /mnt
+
+# /mnt ou /midia
+    Serve para dispositivos montados que estão em /dev
+
+# /etc (Etc...)
+    Arquivos de configuração. Armazena arquvios variados
+
+    # /etc/fstab
+        Serve para dispositivos montados automaticamente pelo SO como um USB, etc
+
+# /root
+    Equivalente ao /home dos usuários
+
+# /opt
+    Programas de fora instalados
+
+# /sbin
+    Binários do SO. Programas do SO como "shutdown" e o gerenciados de disco "fdisk"
+"ifdown" e "ifup"
+
+# /bin
+    Outros programas do SO como "mkdir", "cp", "rm" e outros
+
+# /usr (Unic System Resources)
+    Maior parte das aplicações que instalamos no SO, programas dos usuários, "firefox", "apps do gnome"
+
+    # /usr/lib
+        Binários de dependências dos programas instalados em /usr
+
+    # /usr/src
+        Caso o programa instalado venha com o código fonte junto ele fica neste diretório
+
+    # /usr/include
+        Armazena dependências dos programas que precisam ser compiladas
+
+# /var
+    # /var/log
+        Principais logs do SO
+
+    # /var/mail
+    
+    # /var/spool
+        Bobina de impressão quando utilizada a impressora
+
+    # /var/run
+        PID (Process ID) que estão sendo executados no SO
+
+    # /var/cash
+        Cache do sistema
+
+# /proc
+    Processos em execução são representados ocmo diretórios. Podemos "fuçar ali"
+
+# /tmp
+    Temporários do sistema que ele não garante que estea lá depois do boot
+
+
+/******************\
+    COMANDOS
+\******************/
+
+$ ls -la  
+    mostra todos os arquivos ocultos
+
+$ man     
+    comando de MANual para saber mais sobre os comandos
+
+$ df -h   
+    dispositivos montados 
+
+$ cat 
+    le todo o arquvio e coloca em memória
+
+$ ps aux
+    Todos os processos rodando no SO
+    
+    $ ps aux | less
+        Lista conteúdo em partes, stream
+            j = para cima       k = para baixo
+            gg = para o topo do arquivo     G = para o fim do arquivo
+            /palavra_para_pesquisar
+
+$ ln -s
+    Link simbilico par aoutro arquivo ou diretorio
+    
+    $ ln -s File_A.txt File_B.txt
+
+$ tail 
+    Comando para ver o final de um arquivo
+    
+    $ tail -f File_B.txt ***Muito útil para companhar geraçãod e LOGS*** 
+                        #-f se pendura no final de um rquivo
+
+$ grep 
+    Programa antigo que permite processar texto
+
+    $ ps aux | grep bash    # Mostra apenas as linhas que tem a palavra bash
+
+$ rm -Rf 
+    Apaga diretório pelo terminal
+
+$ chmod +x nome_do_script.sh
+    para dar permissão de execução
+
+$ systemctl status docker.service
+    checar status de um serviço
+    
+    $ systemctl start/stop docker.service
+        iniciar ou parar um serviço
+
+$ echo $PATH
+
+/******************\
+    TMUX
+\******************/
+Terminla que permite ter múltiplos terminla na mesma instancia do terminla
+$ tmux
+
+-> Ctrl + b + % 
+    abre outra tela de terminal
+-> Ctrl + b + o
+    navega entre os terminais abertos
+-> Ctrl + b + "
+    faz split em outra direção
+
+
+/******************\
+    CUSTOMIZAÇÃO
+\******************/
+
+# Ícones
+    /home/rodrigo/.icons    -> diretórios onde devem ficar as pastas com ícones
+
+# Themas do SO
+    /home/rodrigo/.themes   -> diretórios onde devem ficar as pastas com temas
+
+# Boot Loader Grub
+    /boot/grub/grub.cfg     -> arquivo de configuração
+    /boot/grub/themes       -> pastas com arquivo theme.txt

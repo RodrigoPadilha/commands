@@ -1,3 +1,8 @@
+# config global de user e pass
+	git config --global user.name "rodrigo"
+	git config --global user.email "rodriog.gts"
+
+
 # precisa estar no diretório do projeto local
 	git init
 

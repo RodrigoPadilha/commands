@@ -2,6 +2,10 @@
 #### Comandos Básicos ####
 ##########################
 
+
+# Iniciar Serviço no ArchLinux
+    systemctl start docker.service
+
 ??? Se não executar o run com a flag -it o container não fica com status iniciado?
 
 docker pull centos                          -> Baixa imagem
