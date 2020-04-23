@@ -69,6 +69,96 @@ que reverte a alteração anterior
 Obs.: A TAG criada precisa ser enviada para um branch
 	git push Nome_Do_Branch Nome_Da_Tag
 
+# Unir Commits
+	É considerado um amodificação da linha do tempo. 	
+		=> -i rebasear de forma interativa
+		=> HEAD a partir do trabalho atual
+		=> ~3 últimos 3 commits
+	1º) Trazer a lista dos commits que precisam ser modificados
+		$ git rebase -i HEAD~3					// Traz a lista dos últimos 3 commits
+		$ git rebase -i HEAD~id_do_meu_commit		// Traz a lista a partir do commit informado
+	2º) Trocar o comando "pick" por "s" (squash)
+		pick 971dba0 Texto do meu primeiro commmit
+		s 331ada3  Texto do meu segundo commmit
+		s 123abc0  Texto do meu terceiro commmit
+	3º) Informar nova mensagem para o commit (acima de "Please enter ...")
+		Mensagem do meu commit agora unido. 	// Usar o comando :x para sair do VIM
+		# Please enter the commit message for your
+		#...
+		#...
+	4) Fazer o push do novo commit 
+		$ git push 	// ou git push orign master
+			
+# Trazer um único commit específico de outra branch para a branch em que estamos trabalhando
+	$ git cherry-pick id_do_commit_hash
+
+# Juntar dois branchs aplicando commit a commit em nossa branch, para evitar maiores conflitos,
+	$ git rebase nome_do_branch
+
+# Mostra tods os commits
+	$ git log --online
+
+# Encontrar a data em que um branch foi alterado(encontrar erro). 
+  Vai aplicando altrações no branch até que o "erro" apareça no branch
+	$ git bisect start
+	$ git bisect HEAD
+	$ git bisect id_commit_hash
+	$ git bisect bad	// Aplicar as alterações e Andar um commit para frente
+	$ git bisect good	// Informa o momento em que o código "estava correto"
+	$ git bisect reset	// Encerra a busca
+
+# Saber o responsável por iserir uma linha/código no branch
+	$ git blame nome_do_arquivo
+
+# mostra todas as alterações aplicadas pelo commit com o hash informado
+	$ git show {hash}
+
+# Representação um pouco mais gráfica do log 
+	$ git log --graph
+
+# Remove um Branch
+	$ git branch -d nome_do_branch
+
+
+
+
+/******************\
+    GIT FLOW
+\******************/
+-> Master Versão atual 
+	v0.1.0
+
+-> Criar novas features a partir do branch de develop
+	$ git checkout develop
+	$ git checkout -b feature/nova-lista
+	$ git checkout -b feature/novo-login
+
+-> Criar Branchs Hotfix a partir do Master para corrigir um problema em Produção
+	$ git checkout master
+	$ git checkout -b hotfix/v0.1.1		// informar a versão em que esse hotfix vai sair, ou seja vx.x.x+1
+	
+	-->	Mergiar com o hotfix com a Master
+		$ git checkout master
+		$ git merge hotfix/v0.1.1
+		$ git tag -a v0.1.1				// Criar tag no master para marcar a nova versão
+	--> Mergiar o develop com o hotfix para tbm obter a correção do bug
+		$ git checkout develop
+		$ git merge hotfix/v0.1.1
+
+
+-> Criar nova release para testes a partir da develop
+	$ git checkout -b release/v0.2.0
+Obs.: caso surjam erros nos testes, estes devem ser corrigidos NA PRÓPRIA BRANCH DE RELEASE
+
+-> Mergear com Master para colocar nova release em Produção
+	$ git checkout master
+	$ git merge develop
+	
+-> Criar tag na master para identificar nova versão
+	$ git tag -a v0.2.0 -m "Novas listas e login adicionados"
+
+	
+	
 
 
 

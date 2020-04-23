@@ -1,0 +1,70 @@
+Cloud
+
+##########################
+#### Google Cloud ####
+##########################
+cloud.google.com
+IaaS (Infrastructure as a Service)
+
+# CLOUD STORAGE (Armazenar Imagens)
+    - Criar novo Bucket
+        -> Storage 
+            -> Navegador -> Crair Bucket 
+                -> inserir nome do Bucket, opção Regional (América do Sul)
+
+    - Exportar chave de acesso
+        -> APIs & Services
+            -> Credentials
+
+    - Configurar variáveis de ambiente com a chave de acesso do Google cloud
+        -> Colocar o camnho para o arquivo que foi feito download
+
+    - Modificar projeto para buscar imagens e incluir imagens do bucket
+        -> Enviar dados
+            ...
+        -> Recuperar dados
+            ...
+
+# CLOUD SQL (Armazenar dados)
+    - Criar banco de dados
+        -> Storage 
+            -> SQL
+    - Em configurações avançadas setar IPS para conexão com banco 
+        -> IP PUBLICO (0.0.0.0/0 liberado para todos)
+    - Condifurar instância do banco no Google Cloud
+        -> Conectar a instância do banco
+            IP address; Porta padrão; Password
+    -> Executar Scripts/comandos para criação do banco
+
+# COMPUTE ENGINE (Armazenar Aplicação)
+    
+    -> Instalar SDK do Cloud para acessar via terminal
+    -> Dar permissões para conseguir acessar projetos do cloud        
+    -> Configurar projeto para ser utilizado pelo terminal
+        gcloud config set project ID_DO_PROJETO_NO_CLOUD
+    -> Criar Instância de VM (Olhar documentação do Goocle Cloud)
+        gcloud compute instances  create instances create INSTANCE_NAME --image-family=IMAGE_FAMILY --image-project=IMAGE_PROJECT --zone=NOME_DA_ZONA
+            *Obs.: habilitar API quando solicitado
+    -> Verificar se a VM foi criada no painel do Google Cloud
+        -> Compute Engine -> VM Instances
+
+# Instalar Depenências do projeto
+    -> Instalar ferramentas para rodar o sistema (Tomcat, NodeJs, etc)
+    -> Liberar porta do firewall
+    -> Verificar se a VM está com a permissões de leitura/escrita para poder buscar e enviar arquivos 
+        da API do Google Cloud "Allow full acces to all Coud API's"
+
+
+Paas (Platform as a Service)
+# Google App Egine
+    -> Compute -> App Engine
+
+    Instalar as libs e dependências do App Engine para poder enviar o projeto para o Google Cloud
+
+
+Registro gratuitamente de um domínio
+    Freenom
+    www.freenom.com 
+Rastrear completo de uma consulta
+    dig Tool (default Linux)
+    dig +trace www.terra.com
