@@ -151,3 +151,53 @@ $ tmux
 # Boot Loader Grub
     /boot/grub/grub.cfg     -> arquivo de configuração
     /boot/grub/themes       -> pastas com arquivo theme.txt
+
+
+/******************\
+        GRUB
+\******************/
+
+# Extract the theme to /boot/grub/themes/
+
+# Edit /etc/default/grub file. Find the line starting with "#GRUB_THEME" and change it to "GRUB_THEME=/boot/grub/themes/[THEME_FOLDER]/[theme.txt]" (replace [THEME_FOLDER] ; [theme.txt] is probably OK ; remove "[]" brackets)
+
+# Run sudo update-grub
+
+
+/***************************\
+    Variáveis de Ambiente
+\***************************/
+
+
+    $ sudo -H nano /etc/environment
+
+
+
+/**********************************\
+    Configurar Ambiente de DESENV
+\**********************************/
+
+# Docker
+
+    $ sudo pacman -S docker-compose
+
+
+# NodeJs
+    -> Instalar NVM para que este gerencie as versões do Node. Pegar versão mais atual no GIT do NVM
+
+
+git clone https://aur.archlinux.org/insomnia.git
+cd insomnia/
+makepkg -si
+
+
+cd usr/share/icons/
+cd home/rodrigo/.icons/
+
+
+
+git clone https://aur.archlinux.org/kazam.git
+cd kazam/
+makepkg -si
+
+sudo pacman -Sy postman

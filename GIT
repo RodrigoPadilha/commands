@@ -19,6 +19,12 @@
 # Lista Diretórios remotos c/ endereço
 	git remote -v
 
+# Listar Branches Remotos 
+	git branch -r ou git branch -a
+
+# Mudar para Branch remoto
+	git checkout --track origin/release/0.1.2
+
 # criar novo branch
 	git checkout -b nome_novo_branch
 

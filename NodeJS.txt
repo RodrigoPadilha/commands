@@ -1,0 +1,110 @@
+npm init -y
+
+/*************\
+  EXPRESS
+\*************/
+  npm install express
+    - criar arquivo index.js
+    - importar modulo express
+    - configurar instancia do app
+    - criar rotas
+    - executar método listen
+
+/*************\
+  NODEMON
+\*************/
+  npm install nodemon -D  //somente enquanto estiver desenvolvendo aplicação, pois em Prod será executado apenas com NODE
+    - Configurar script "start" no package.json. Adicionar o arquivo inicial da aplicação
+
+/*************\
+  CORS
+\*************/  
+|> Instalar módulo de segurança
+  npm install cors
+
+|> Importar o módulo de segurança
+    const cors = require('cors')
+
+|> Adicionar ao projeto o módulo de cors  // Habilita qual endereço vai poder acessar a nossa aplicação
+    app.use(cors())                 // Todas as plicações FrontEnd      
+    app.use(cors({                  
+      origin: 'http://meuapp.com'   // Quais endereços estão liberado para acesso
+    }));
+
+/*************\
+  KNEX.JS
+\*************/
+  |> Instalar o ORM (Query Builder KNEX.JS)
+    npm install knex
+
+  |> Instalar driver do Banco escolhido, sqlite, Postgress, etc (Olhar na documentação o comando correto)
+    npm install sqlite3
+
+  |> Comando do framework para criar arquivo do banco de dados
+    npx knex init           // Cria arquivo (knexfile.js) de configurações do Knex para acesso ao banco
+
+  |> Criar diretórios para armazenar os arquivos do banco
+    /src/database/
+    /src/database/migrations
+
+  |> Alterar as configurações do arquivo knexfile.js para conexão com a database e migrations
+    connection: {
+      filename: './src/database/nome_do_banco.sqlite'   // Diretório do banco e nome do banco
+    },
+    migrations: {
+      directory: './src/database/migrations'
+    },
+    useNullAsDefault: true,   // Linha para evitar waening no SQLite3 que não suporta valores NULL como default
+  
+  |> Crias as Tabelas no banco
+    -> Criar arquivo de Migrations
+      npx knex migrate:make nome_da_mirgation   //Nome deve representar o que a mirgation vai fazer
+    
+    -> Alterar o arquivo de migration criado no diretório definido
+      exports.up = function(knex){
+        ...
+      };
+      exports.down = function(knex){
+        ...
+      };
+    -> Executar os scripts de criação  
+      npx knex migrate:latest
+
+
+/*************\
+  REQUISIÇÕES
+\*************/
+  |> Tipos de Parâmetros
+
+    - Query Params: Parâmetros nomeados na rota após "?"
+      /users?name=Diego
+      Filtros, Paginação, etc
+
+    - Route Params: Utilizados para identificar recursos
+      /users/:id |> /users/1
+
+    - Body: Corpo da requisição, utilizado para criar ou alterar recursos
+      Formato JSON
+      POST |> /users
+
+  |> Capturar Parâmetros de uma requisição
+
+    - Query Params:
+      const queryParams = request.query;
+
+    - Route Paramas
+      const queryParams = request.params  
+      
+    - Body Paramas
+      const bodyParams = request.body
+
+  |> Adicionar Parâmetros em uma requisição
+    
+    - Query Params:
+      ?????
+
+    - Route Paramas
+      ?????
+      
+    - Body Paramas
+      ?????

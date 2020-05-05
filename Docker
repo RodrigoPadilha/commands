@@ -96,6 +96,20 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
     docker inspect ?NOME_DO_CONTAINER?
 
 
+#################
+#### VOLUMES ####
+#################
+    - target: diretório do container
+    - source
+
+# Bind mount
+    --mount type=bind, source=/home/rodrigo/meu-dir/, target=/var/www
+
+# Volume Nomeado
+    --mount type=bind, source=meu-volume, target=/var/www
+
+# Temp em memória RAM (apenas no linux)
+    --mount type=tmpfs, target=/var/www
 
 ####################
 #### DOCKERFILE ####
@@ -132,6 +146,10 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
 
 # cria um container especificando seu nome e qual rede deverá ser usada.   
     docker run -it --name NOME_CONTAINER --network NOME_DA_REDE NOME_IMAGEM
+
+#### docker run -d --name meu-mongo --network rede-producao mongo
+#### docker run -d -p 3000:3000 --name minha-aplicacao --network rede-producao meu_contianer
+#### docker inspect minha_rede
 
 
 
