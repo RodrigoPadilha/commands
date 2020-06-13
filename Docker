@@ -76,6 +76,9 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
 # Retorna lista de IDs dos containers que estão rodando
     docker ps -q
 
+# Logs de um container (tail no arquivo de logs)
+    docker logs -f ID_CONTAINER
+
 # Parar todos os containers que estão rodando
     docker stop -t 0 $(docker ps -q) // $(algum_comando) executa o que está dentro dos parenteses antes
 
@@ -99,17 +102,40 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
 #################
 #### VOLUMES ####
 #################
+
+# Listar volumes 
+    docker volumes ls
+
+# Criando Volumes (FORMA ANTIGA, a documentação indica para usar o "--mount")
+    -> Mapeia uma pasta específica do Host para Container (BindMount)
+        Armazena em um caminho absoluto do Host e em uma pasta dentro do container
+            docker ID_CONTAINER run -it -v /home/rodrigo/minha_pasta:/pasta_do_container
+
+    -> Mapeia um diretório default do docker do Host para Container (Volume)   
+        Armazena em uma pasta específica do Docker dentro do Host
+            docker ID_CONTAINER run -it -v /pasta_do_container
+
+    -> Cria volume nomeado para usar no Container ()
+        Armazena em uma pasta específica do Docker dentro do Host mas aparece na lista de volumes (docker volumes ls)
+            docker volume create meu_volume
+            docker ID_CONTAINER run -it -v meu_volume:/pasta_do_container
+
+
+# Criando volumes com --MOUNT
     - target: diretório do container
     - source
 
-# Bind mount
-    --mount type=bind, source=/home/rodrigo/meu-dir/, target=/var/www
+    # Bind mount
+        docker ID_CONTAINER run -it --mount type=bind, source=/home/rodrigo/meu-dir/, target=/var/www
 
-# Volume Nomeado
-    --mount type=bind, source=meu-volume, target=/var/www
+    # Volume Nomeado
+        docker ID_CONTAINER run -it --mount type=bind, source=meu-volume, target=/var/www
 
-# Temp em memória RAM (apenas no linux)
-    --mount type=tmpfs, target=/var/www
+    # Temp em memória RAM (apenas no linux)
+        docker ID_CONTAINER run -it --mount type=tmpfs, target=/var/www
+
+
+
 
 ####################
 #### DOCKERFILE ####

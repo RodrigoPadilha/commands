@@ -1,0 +1,38 @@
+MSSQL
+
+https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-cmd&viewFallbackFrom=sql-server-2014
+
+# Download Image MSSQL
+docker pull mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+
+# Cria container e Inicia ele com as configurações corretas
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Teste@123" -p 1433:1433 --name sql_dev -d mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+
+# Executa comando para troca de senha
+docker exec -it sql_dev /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Teste@123" -Q "ALTER LOGIN SA WITH PASSWORD='Teste@123'"
+
+# Acessa Container
+docker exec -it sql_dev "bash"
+
+# Cria database através do terminal (de dentro do container)
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Teste@123"
+    CREATE DATABASE MPProjectsDEV
+    SELECT Name from sys.Databases
+    GO
+
+
+MPProjectsDEV
+
+ DEV: {
+    client: 'sqlite3',
+    connection: {
+      filename: './src/database/db.sqlite'
+    },
+    migrations: {
+      directory: './src/database/migrations'
+    },
+    useNullAsDefault: true,
+    seeds:{
+      directory: './src/database/seeds'
+    },
+  },

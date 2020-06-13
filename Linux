@@ -116,11 +116,12 @@ $ rm -Rf
 $ chmod +x nome_do_script.sh
     para dar permissão de execução
 
-$ systemctl status docker.service
+$ systemctl status docker.service               $ systemctl status snapd.service
     checar status de um serviço
     
-    $ systemctl start/stop docker.service
+    $ systemctl start/stop docker.service       $ systemctl start snapd.service
         iniciar ou parar um serviço
+
 
 $ echo $PATH
 
