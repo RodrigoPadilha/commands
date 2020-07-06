@@ -94,6 +94,13 @@ $ ps aux
             gg = para o topo do arquivo     G = para o fim do arquivo
             /palavra_para_pesquisar
 
+$ sudo netstat -lpn |grep :'3000'
+    Verifica processos rodando na porta 3000 ou em uma porta específica
+
+$ ps -aux | grep forticlientsslvpn
+    Verifica processos rodando de um programa específico
+    $ kill -9 8826 // mata processo pelo ID do processo (Primeiro numero da esquerda)
+
 $ ln -s
     Link simbilico par aoutro arquivo ou diretorio
     
@@ -163,6 +170,14 @@ $ tmux
 # Edit /etc/default/grub file. Find the line starting with "#GRUB_THEME" and change it to "GRUB_THEME=/boot/grub/themes/[THEME_FOLDER]/[theme.txt]" (replace [THEME_FOLDER] ; [theme.txt] is probably OK ; remove "[]" brackets)
 
 # Run sudo update-grub
+
+
+/*******************\
+    Configurar SNAP
+\*******************/
+    https://snapcraft.io/install/snapd/arch
+    
+    sudo systemctl enable --now snapd.socket
 
 
 /***************************\

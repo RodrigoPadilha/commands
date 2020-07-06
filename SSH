@@ -1,0 +1,10 @@
+# Espelhar pasta local para um servidor (Youtube -> Editor de Código sensacional para ...)
+    - Deve estar no diretório que será sincronizado
+
+        $ rsync -av . --exclude='.get/' hostgator:./jogo
+        -av -> faz o espelhamento de arquivos
+        . -> pega a pasta local
+        --exclude -> pastas que não devem ser sincronizadas
+        hostgator -> nome do servidor
+        ./jogo -> pasta do servidor onde será jogado os arquivos
+    
