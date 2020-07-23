@@ -1,1 +1,7 @@
+loadkeys br-abnt2
 
+fdisk -l            // lista os disoc da maquina
+
+cfdisk /dev/sdx     // utilitario para criar partiçoes
+
+FSTAB???28:45
