@@ -75,7 +75,7 @@ pacstrap /mnt base base-devel linux linux-firmware
 
 
 echo "Gerando arquivo FSTAB..."
-gefstab -U -p /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 echo "O arquivo FSTAB foi gerado corretamente?"
 read ok
