@@ -6,6 +6,29 @@ Flat-Remix
 https://www.osradar.com/install-flat-remix-theme-ubuntu/
 
 /******************\
+    PARTIÇÕES
+\******************/
+    # BIOS e MBR (Master Boot Record) -> mais antiga
+    # UEFI e GPT (Guid Partition Table) -> mais novo
+        Definem a estrutura das partições na unidade de disco
+        Tabela com as informações sobre o particionamento.
+        (Qtd de partições, Tamanho formato de dados, onde começam e terminam, etc.)
+    
+    # Primárias
+        partições mais comuns e principais, normalmente possui o SO
+        MBR -> podem ter 4 partições
+        GPT -> ilimitadas    
+
+    # Estendidas
+        é uma partição que aloca espaço para subpartições Lógicas, ou seja, uma partição qeu contém outras partições
+        devido a limitação de 4 partições do MBR, as aprtições Estendidas permitem que um disco possua várias outas divisões (partições)
+    
+    # Lógicas
+        é uma partição que está dentro de uma partição Estendida
+        
+
+
+/******************\
     DIRETÓRIOS
 \******************/
 
@@ -131,6 +154,10 @@ $ systemctl status docker.service               $ systemctl status snapd.service
 
 
 $ echo $PATH
+
+$ mount /dev/sdxx /mnt/minha_pasta
+    montar partições de disco
+    Exemplo: $ mount /dev/sdb1 /mnt/dados
 
 /******************\
     TMUX

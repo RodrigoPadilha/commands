@@ -1,8 +1,32 @@
-loadkeys br-abnt2
+###############################
+# Configurações do Computador #
+###############################
+    -> Verifica na bios da máquina 
+        Secure Boot Desligado
 
-fdisk -l            // lista os disoc da maquina
+        Modo de Boot
+            Bios Legacy (MBR)
+            UEFI        (GPT)
+            Both
 
-cfdisk /dev/sdx     // utilitario para criar partiçoes
+# Comandos úteis
+    loadkeys br-abnt2   // configura teclado brasileiro (ç)
+    fdisk -l            // lista os discos da maquina
+    ip addr show        // mostra o ip da máquina
+    wifi-menu           // utilitário para pesquisar redes wifi (em notebooks)
+
+# Particionamento de discos
+    fdisk /dev/sdx      // Abrir modo de configuração para criar patições
+        m               // Lista de opções
+        g               // cria tabela GPT
+
+    cfdisk /dev/sdx     // utilitario para criar partiçoes
+        Criar 4 partições em modo UEFI
+            /boot   | 500M  | BIOS boot
+            /       | 60G   | Linux filesystem
+            /home   | ???   | Linux filesystem
+            swap    | 2G    | linux swap
+
 
 BIOS ou UEFI??? 21:59
 FSTAB???28:45
