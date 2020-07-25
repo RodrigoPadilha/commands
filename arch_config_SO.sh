@@ -1,9 +1,6 @@
 ##########################
 #  Config SO Instalado   #
 ##########################
-echo "Alterado para SO da máquina"
-arch-chroot /mnt
-
 echo "Ajute de TimeZone"
 ls -sf /usr/share/zoneinfo/America/Sao_Paulo >> /etc/localtime
 
