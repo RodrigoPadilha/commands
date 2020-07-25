@@ -33,5 +33,5 @@ echo "Instalando pacotes de interface e compatibilidade"
 pacman -Sy dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo
 
 echo "Criando usuário rodrigo..."
-useradd -m -g users -G whell rodrigo
+useradd -m -g users -G wheel rodrigo
 echo rodrigo ALL=(ALL)ALL >> /etc/sudoers
