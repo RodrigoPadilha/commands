@@ -25,13 +25,14 @@ echo 127.0.0.1 localhost.localdomain localhost >> /etc/hosts
 echo ::1 localhost.localdomain localhost >> /etc/hosts
 echo 127.1.1 sirius.localdomain sirius >> /etc/hosts
 
-pass="Kepler@123"
+pass="Kepler"
 echo "Alterar senha root para $pass"
 echo -e "${pass}\n${pass}" | passwd
 
 echo "Instalando pacotes de interface e compatibilidade"
-pacman -Sy dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo
+pacman -S --noconfirm dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo
 
 echo "Criando usuário rodrigo..."
 useradd -m -g users -G wheel rodrigo
 echo rodrigo ALL=(ALL)ALL >> /etc/sudoers
+echo -e "${pass}\n${pass}" | passwd rodrigo

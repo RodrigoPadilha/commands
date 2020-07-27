@@ -9,6 +9,11 @@ echo "Particionando Disco..."
 echo "Informe o disco que será instalado o Arch? Exemplo: /dev/sda"
 read disco
 $ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << FDISK_CMDS  | sudo fdisk $disco
+g
+w
+FDISK_CMDS
+
+$ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << FDISK_CMDS  | sudo fdisk $disco
 g      # create new GPT partition
 n      # add new partition
 1      # partition number
@@ -71,7 +76,7 @@ swapon $swapPartition
 
 
 echo "Push dos pacotes do Arch Linux"
-pacstrap /mnt base base-devel linux linux-firmware
+pacstrap --noconfirm /mnt base base-devel linux linux-firmware
 
 
 echo "Gerando arquivo FSTAB..."
