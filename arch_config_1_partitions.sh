@@ -5,6 +5,10 @@ fdisk -l
 ######################
 #  Config Partições  #
 ######################
+       # Essa etapa de formatação do disco não está funcionanod corretamente
+       # Add passo para deletar todas as partições
+       # Verificar poque é criado apenas a partição de "/boot" e "/
+
 echo "Particionando Disco..."
 echo "Informe o disco que será instalado o Arch? Exemplo: /dev/sda"
 read disco
@@ -76,7 +80,7 @@ swapon $swapPartition
 
 
 echo "Push dos pacotes do Arch Linux"
-pacstrap --noconfirm /mnt base base-devel linux linux-firmware
+pacstrap /mnt base base-devel linux linux-firmware
 
 
 echo "Gerando arquivo FSTAB..."

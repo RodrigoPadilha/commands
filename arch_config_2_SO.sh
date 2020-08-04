@@ -30,9 +30,11 @@ echo "Alterar senha root para $pass"
 echo -e "${pass}\n${pass}" | passwd
 
 echo "Instalando pacotes de interface e compatibilidade"
-pacman -S --noconfirm dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo
+pacman -S --noconfirm dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo nano
 
 echo "Criando usuário rodrigo..."
 useradd -m -g users -G wheel rodrigo
-echo rodrigo ALL=(ALL)ALL >> /etc/sudoers
 echo -e "${pass}\n${pass}" | passwd rodrigo
+# Esse passo preicisa ser feito manualmente com nano pois a 
+# linha não deve ser add no final do arquivo
+echo rodrigo ALL=\(ALL\)ALL >> /etc/sudoers

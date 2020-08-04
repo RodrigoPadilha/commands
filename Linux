@@ -210,8 +210,6 @@ $ tmux
 /***************************\
     Variáveis de Ambiente
 \***************************/
-
-
     $ sudo -H nano /etc/environment
 
 
@@ -221,12 +219,20 @@ $ tmux
 \**********************************/
 
 # Docker
-
     $ sudo pacman -S docker-compose
 
 
 # NodeJs
     -> Instalar NVM para que este gerencie as versões do Node. Pegar versão mais atual no GIT do NVM
+
+
+
+/**********************************\
+    Criar atalho para um programa
+\**********************************/
+    echo -e '[Desktop Entry]\n Version=1.0\n Name=xampp\n Exec=sudo /opt/lampp/manager-linux-x64.run\n Icon=/opt/lampp/icons/world1.png\n Type=Application\n Categories=Application' | sudo tee /usr/share/applications/xampp.desktop
+
+
 
 
 git clone https://aur.archlinux.org/insomnia.git
@@ -244,3 +250,5 @@ cd kazam/
 makepkg -si
 
 sudo pacman -Sy postman
+
+
