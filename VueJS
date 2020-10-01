@@ -1,0 +1,614 @@
+Front VueJS
+Backend NodeJS - middleware
+SematicIT
+
+
+Repositório 
+    sit-mobile
+
+    proxy.js
+    constants.js 
+        URL_base configuração dos environments
+
+    Passo 1 
+        npm run serve   // compilar parte do front
+
+    Passo 2        
+        npm run proxy-dev   // sobe middleware de comunicação entre Sematic IT e Vue.JS
+
+    ***BUILD***
+        npm install -g pm2
+        PM2 controle de processo do node, controla a aplicação(Proxy) -     ??? servidor do NODE???
+        
+    npm run build   //gera os estaticos para a aplicação(o qeu o susuário vai acessar)
+
+
+
+
+Instalar extensão do VueJs Tools
+app.diagrams.net
+
+Ao fazer uma requisição pelo Fron(Vue.js), sempre cai no * (ByPass) do Proxy(nodeJs) que 
+
+Cache no PROXY!!!
+
+O que é usado para fazer requisição REST entre Front, Middleware e SematicIt?
+
+
+
+
+Estrutura do Projeto
+O que é apenas do Proxy e do Front???
+Para usar um componente do Material como faz???
+
+
+Quasi libs são usadas?
+    VueEx(Redux), Axios, etc...
+    Vuetify com MaterialDesign
+
+
+
+
+Tarefa?
+
+
+
+npm install vue-cli@2.6.11 -g
+
+Estrutura do projeto
+A) Todos os arquivos da pasta src são transformados em um bundle chamado build.js e este é carregado pelo index.html. Inclusive o script do Vue.js faz parte desse arquivo. Então, o próprio Vue.js se encarregará de exibir o conteúdo em index.html interpretando as informações dentro do bundle.
+B) Em ambiente de desenvolvimento, o endereço /dist/build.js aponta para um endereço no servidor que aponta para um arquivo criado em memória. Esse processo agiliza o tempo de alteração do build.js a cada alteração, melhorando assim sua experiência de desenvolvimento.
+D) Declaramos componentes em Single File Templates. Esses arquivos nada mais são do que módulos que exportam componentes.
+E) A estrutura padrão de um componente é composta pelas tags template, script e style.
+
+
+
+
+
+
+
+
+                                        ###############
+                                        # FUNÇÂO DATA #
+                                        ###############
+Função data deve retornar um objeto. Cada propriedade pode ser aessada no html por Interpolação {{...}}
+    
+    Databind
+    : ou v-bind: realiza uma associação que flui da fonte de dados para a view. 
+v-bind: unidirecional, ou seja, dados fluem da função para o HTML e não ao contrário        Qualquer mudança na fonte de dados fará com que a view seja atualizada para representar o novo valor
+    @ ou v-on: realiza uma associação de evento que flui da view para a fonte de dados. 
+        Qualquer mudança na fonte de dados atualizará a view associada a ela, contanto que haja uma associação através de v-bind.
+
+
+main.js 
+    -> App.vue
+        -> /public/index.html
+
+Interpolação não funciona em atributos
+
+
+Módulo para requisições Rest que se intgra muito bem com o Vue
+    npm install vue-resource@1.0.3 --save
+
+
+Vue possui métodos de ciclo de vida (Lyfecycle Hooks)
+    dentro do script export default
+        created()
+        
+
+Computed property
+    computed:{
+        ...
+    }
+
+
+
+
+
+                                    ####################
+                                    # Lifecycle Hooks #
+                                    ####################
+    - Um componente quando é criado passa por várias etapas, onde cada uma detas nos permite executar algum código.
+    - Dentro da função "data()"
+    
+    created()
+
+
+
+
+                                        ###############
+                                        # COMPONENTES #
+                                        ###############
+    Estrutura:
+        <template>
+        <\template>
+
+        <script>
+            import MeuComponente from './diretorio/meu-componente/MeuComponenete.vue'
+            ... outros imports
+
+            export default {
+                props: ['abc', 'edf', '...'],                
+
+                components: {
+                    'nome-meu-componente': MeuComponente,
+                    ...
+                },
+
+                data(){         // Function Data
+                    ...
+                    return {
+                        titulo: '',
+                        imagens: [],
+                        texto: ''
+                        ...
+                    }
+                }
+
+                computed: {     // Computed property
+                    ...
+                },
+
+                methods: {      // metodos que podem ser chamados para interação entre os componentes
+                    ...
+                    remove(){
+
+                    }                    
+                    salva() {
+
+                    }
+                },
+
+                created() {
+                    this.$http.get('http://lcoalhost:3000/api/v1/imagens')
+                        .then(...)
+                }
+            }
+        <\script>
+
+        <style scoped>
+            /* .calsses_css*/
+        <\style>
+
+
+
+
+                                ################################
+                                # PASSAR DADOS PARA COMPONENTE #
+                                ################################
+    -> Via PROPS
+        <meu-componente :minha-prop="alguma_variavel"/>
+
+        /* MeuComponenete.vue */
+        export default {
+            props: {
+                minha-prop: {
+                    type: Array,
+                    required: true
+                }
+            }
+        }
+
+
+
+
+                                ##########################
+                                # IMPORTAR UM COMPONENTE #
+                                ##########################
+    <script>
+        import { MeuComponenete } from './diretorio/MeuComponenete.vue';
+
+        export default {
+            components: {
+                'meu-componente': MeuComponenete
+            }
+        }
+    </script>
+
+
+
+
+
+                                    ###############
+                                    #    ROTAS    #
+                                    ###############
+
+    Uma Rota é um objeto javascript com duas propriedades:
+        { path:'', component: MeuComponenteHome },              /* http://localhost:3000/# */
+        { path:'cadastro', component: MeuComponeneteCadstro}    /* http://localhost:3000/#/cadastro */
+    
+    Ps.: para poder acessar os recursos sem o "#", é necessário que o servidor devolva sempre 
+    o mesmo index.html. Exemplo:
+            const router = new VueRouter({
+                routes, 
+                mode: 'history'
+            });
+
+
+- Intalar VueRouter
+    npm install vue-router@2.1.1 --save
+
+- Importar no main.js e registrar
+    import VueRouter from 'vue-router';
+    Vue.use(VueRouter)
+
+- Em src criar o arquivo routes.js
+
+- Importar o arquivo "routes.js" no main.js
+    import routes from './routes';
+
+- Em main.js criar instancia de router passando o arquivo de rotas da aplicação
+    const router = new VueRouter({ routes })
+
+- Passar para a Vue Instance (new Vue) para que as rotas seja acessíveis em todos os 
+componentes da aplicação
+    Exemplo: 
+        import { routes } from './routes';
+
+        Vue.use(VueRouter);
+
+        const router = new VueRouter({
+        routes : routes
+        });
+
+        Vue.use(VueResource);
+
+        new Vue({
+            el: '#app',
+            router,
+            render: h => h(App)
+        })
+
+- Utilizar o compoenete de rotas router-view que serve para indicar para o template da página
+principal da aplicação o local no qual os demais componentes carregados através de rotas devem
+ser renderizados
+
+- Para navegar entre rotas utilziar o componente "router-link" que é da lib Vue-Router    
+
+    Exemplo: 
+        <nav>
+        <ul>       
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/cadastro">Cadastro</router-link></li>
+        </ul>
+        </nav>
+
+
+    -> Chamar outra rota:
+        this.$router.push({name: 'nome_rota'})
+
+
+    -> Gatilhos das rotas
+        beforeRouteEnter(to, from, next)    // to = para onde estamos indo
+                                            // from = de onde estamos vindo
+                                            // next = o que faremos a seguir
+
+
+
+
+
+
+                                ##############################
+                                #    PARAMETRIZANDO ROTAS    #
+                                ##############################
+        
+    *** Forma de criar uma página de Cadastro e poder reutilizar o mesmo para editar algum registro.
+    OBS.: não confundir 
+        $route  - acesso aos parâmetros qeu o componente recebeu pela rota
+        $router - sabe tudo sobre a ???versão??? do sistema
+
+    ->  Muitas vezes queremos passar parâmetros para os componentes através da rota. Para isso, precisamos parametriza-la
+        Exemplo:
+            import Componente1 from './components/componente1/Componente1.vue';
+            export const routes = [
+                { path: '/minharota/:nome', component: Componente1 },
+            ];
+
+    -> No componente que será chamado pela rota, temos acesso ao "$route", pois o VueRouter é registrado no global "view object".      
+        É através dele que conseguimos extrair o parâmetro passado na rota e utilizá-lo em nosso componente.
+        Exemplo:
+            this.$route.params...
+
+    ->  É preciso adicionar a propriedade "id" como propriedade do objeto retornado pela função "data()"    
+        Exemplo:
+            data() {
+                return {
+                    foto: new Foto(),
+                    id: this.$route.params.id
+                }
+            },
+
+
+
+
+
+                            ###################################
+                            #    COMUNICAÇÃO COM COMP. PAI    #
+                            ###################################
+    A comunicação com elementos pai é feita através de eventos customizados
+
+    -> Chamando evento do elmento PAI:
+        - O elemento filho executa um método do elemento pai:
+            this.$emit('nomeDoEventoCust')
+
+        - Elemento pai deve declarar um evento customizado:
+            <template>
+                <meu-botao @nomeDoEventoCust="remove(itemNome)"/>
+            </template>
+            <script>
+                ...
+                methods: {
+                    remove(itemNome){
+                        ...
+                    }
+                }        
+            </script>
+    
+    -> Passando dados para um elemento PAI:
+        this.$emit('nomeDoEventoCust', 'Rodrigo Padilha')
+
+        <template>
+            <meu-botao @nomeDoEventoCust="remove(itemNome, $event)"/>
+        </template>
+        <script>
+            ...
+            methods: {
+                remove(itemNome, $event){
+                    ...
+                    console.log($event)
+                }
+            }        
+        </script>
+
+
+
+
+
+
+
+                                    ######################
+                                    #    LOCALSTORAGE    #
+                                    ######################
+    -> Add
+        localStorage.setItem('token', response.data.access_token)
+    -> Remove
+        localStorage.removeItem('token')
+    
+
+
+
+
+
+
+                                        ##############
+                                        #    VUEX    #
+                                        ##############
+    É uma biblioteca que implementa um padrão de gerenciamento de estado
+
+    Componente
+    ^    .dispatch -=> Actions
+    |                    .commit -=> Mutations   -=> State
+    |_________________________________________________|                    
+
+    -> Store: controla as alterações do estado da aplicação. Onde é declarados os estados
+        - Criar arquivo store.js        
+           
+            import Vuex from 'vuex'
+            import Vue from 'vue'
+           
+            Vue.use(Vuex)       // Habilitar o Vuex para uso no Vue                                
+
+            const estado = {
+                token: null,
+                usuario:{}
+            }
+
+                                                                        
+            const mutations = {                                         // As mutations são a única maneira de mudar o estado de uma store vuex, mas devem ser síncronas.
+                EXECUTAR_ALGUMA_MUDANCA(state, { token, usuario }){     //  Definir mutatinos. Próprio estado e os dados que estão enviadno para a mutação (payload)
+                    state.token = token
+                    state.usuario = usuario
+                }
+            }
+
+            const actions = {
+                minhaAcao({ commit }, ...){
+                    commit('EXECUTAR_ALGUMA_MUDANCA',{
+                        token: 'meu_token',
+                        usuario: 'meu_usuario'
+                    })
+                }
+
+            }
+
+            export default new Vuex.Store({
+                state: estado,
+                mutations
+            })        
+
+        - Deixar o "Vuex" disponível na aplicação
+
+            /* main.js */
+            import store from './store'
+
+            new Vue({
+                router,
+                store: store     
+            })      
+              
+
+        - Para usar a store
+            this.store.commit('EXECUTAR_ALGUMA_MUDANCA', {
+                token: 'meu_token',
+                usuário: 'meu_usuario'
+            })
+
+        - Para disparar/usar uma alteração
+            this.$store.dispatch('minhaAcao', this.meusDados, ...)
+                .then(() => this...)
+
+    -> Acessores: mapeamento de métodos getters para não precisar ficar digitando 
+        this.$store.state.token
+            import { mapGetters } from 'vuex'
+            computed: {
+                ...mapGetters(['acessorABC'])
+            }
+
+
+
+
+
+
+
+                                ###################
+                                #    DIRETIVAS    #
+                                ###################
+    Implementa alguma ação que pode ser incorporada a qualquer elemento ou componente.
+    Código isolado que pode ser usado em mais de um elemento ou componente para alterar o comportamento do mesmo.
+    Deve ser importada no main ou no próprio componente
+        Exemplo:
+
+            <meu-elemento v-minha-diretiva="15" />                  // diretiva passando 1 parametro
+            <meu-elemento v-minha-diretiva.animate="15" />          // diretiva passando 1 modificadores e 1 parametro
+            <meu-elemento v-minha-diretiva.animate.reverse="15" />  // diretiva passando 2 modificadores e 1 parametro
+            <meu-elemento v-minha-diretiva:rotate.animate="15" />   // diretiva passando 1 argumento 1 modificado e 1 parametro
+            <meu-elemento v-minha-diretiva:scale.animate="1.2" />   // diretiva passando 1 argumento 1 modificado e 1 parametro
+            
+
+
+            // el       = componente/elemento que foi associado a diretiva
+            // binding  = usado para receber os parâmetros da diretiva
+            // vnode
+            Vue.diretive('minha-diretiva', {
+                bind(el, binding, vnode){               
+                    console.log(binding.value)          // 15
+                    if(binding.modifiers.animate){      // pegando modificador
+                        console.log("bla bla bla")
+                    }
+                    if(binding.arg){                    // pegando argumentos
+
+                    }
+                }
+            })                                  
+
+
+
+                                ######################
+                                #    Data Binding    #
+                                ######################
+    
+    -> Capturando dados com data binding bidirecional
+        a asociação de dados pode ser da view para o js ou do js para a view, sendo esta feita da seguinte forma:
+            @input="foto.url = $event.target.value"     // view para o js
+            :value="foto.url"                           // js para a view
+        Exemplo: 
+            <div>
+                <input id="url"     autocomplete="off"  @input="foto.url = $event.target.value"   :value="foto.url">
+            </div>
+
+    -> Two-way data binding (v-model)
+        o v-model implemena o two-way para executar associação de dados, ou seja, sincroniza os dados conforme são altrados
+        Exemplo: 
+            <div>
+                <input id="url"     autocomplete="off"  v-model="foto.url">
+            </div>
+
+# v-model         - 
+# v-model.lazy    - o modifier "lazy" faz a associação de dados apenas quando sair(perder o foco) do campo
+# v-show          - só exibe alguma coisa quando o atributo for verdadeiro
+    v-show="foto.url" // foto.url é um atributo de um objeto que está na funçao data
+
+    -> Criar modelo (Classe) para melhor leitura de código nas associaçoes de dados
+        - Criar um diretório "domain" e dentro destas criar os modelos
+            MODELOS = representação de "algo" do mundo real que precisamos representar digitalmente
+        - Em "domain" criar o modelo
+            default export class MeuModelo(){
+                constructor(valueA = "", valueB = ""){
+                    this.minhaPropriedade = valueA;
+                }
+            }
+
+
+
+                                    #####################
+                                    # Configuração JEST #
+                                    #####################
+-> instalei o jest    
+    npm install --save-dev jest @vue/test-utils vue-jest
+
+//Conformar necessidade dessas Libs...
+    --> instalei suporte para babel para suportar "javascripts modernos"
+        faz o babel rodar como parte do processo do jest, transpilando os testes
+            npm install --save-dev babel-core babel-jest babel-preset-env    
+
+-> init nas configurações do jest 
+    ./node_modules/.bin/jest --init
+
+
+
+-> configurei o jest.config
+    * habilitar:
+        moduleFileExtensions: [
+            "js",
+            "json",
+            "jsx",
+            "ts",
+            "tsx",
+            "node",
+            // tell Jest to handle `*.vue` files
+            "vue"
+        ],
+        ...
+        transform: {
+            // process `*.vue` files with `vue-jest`
+            ".*\\.(vue)$": "vue-jest"
+        },
+
+    * Habilitar Cobertura de código
+        "collectCoverage": true,
+        "collectCoverageFrom": ["**/*.{js,vue}", "!**/node_modules/**"],
+    
+-> criei a pasta __tests__
+-> criei o primeiro teste neste diretório primeiro.test.js
+-> configurei o script no package.json
+    "scripts": {    
+        "test": "jest"
+    },
+
+-> rodei os testes 
+    npm run test
+
+
+
+"test": "mochapack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js"
+
+-> instalei o test-utils do vue e o mocha
+    npm install --save-dev @vue/test-utils mocha mochapack
+
+
+***CUIDADO:
+    <meu-botao :propA='variavel' />     /* Databinding ou associacao de valor para um componente*/
+    <meu-botao propB='valor_string' />  /* Passando uma string para o componente */
+
+    <meu-botao tipo="button" rotulo="REMOVER" @click="remove()"/>
+
+@click
+:value
+
+v-show
+v-if
+v-else
+v-for
+
+
+
+
+
+ToDo
+    - criar rota que receba parametro para exibir detalhes do filme
+    - implementar classe service para buscar dados de filmes
+        search()
+        findById(id)
+        findByName(name)
+        ...
+

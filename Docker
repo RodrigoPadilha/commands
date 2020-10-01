@@ -143,10 +143,10 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
     Responsável por criar a imagem de um container Docker, incluindo as configurações de rede e portas, pastas, diretórios, etc. Tabém pode se basear em outra imagem padrão disponível na Docker
 
  # cria uma imagem a partir de um Dockerfile.
-    docker build -f Dockerfile
+    docker build -f Dockerfile .    (NÃO ESQUECER DO PONTO FINAL)
 
 # constrói e nomeia uma imagem não-oficial informando o caminho para o Dockerfile.
-    docker build -f CAMINHO_DOCKERFILE/Dockerfile -t NOME_USUARIO/NOME_IMAGEM
+    docker build -f CAMINHO_DOCKERFILE/Dockerfile -t NOME_USUARIO/NOME_IMAGEM . (NÃO ESQUECER DO PONTO FINAL)
 
 # inicia o processo de login no Docker Hub.
     docker login

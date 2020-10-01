@@ -14,6 +14,8 @@
     fdisk -l            // lista os discos da maquina
     ip addr show        // mostra o ip da máquina
     wifi-menu           // utilitário para pesquisar redes wifi (em notebooks)
+    systemctl --failed  // verificar serviços que estão apresentadno falhas
+    journalctl -p 3 -xb // logs de erro do SO
 
 # Particionamento de discos
     fdisk /dev/sdx      // Abrir modo de configuração para criar patições
@@ -26,6 +28,7 @@
             /       | 60G   | Linux filesystem
             /home   | ???   | Linux filesystem
             swap    | 2G    | linux swap
+
 
 
 BIOS ou UEFI??? 21:59

@@ -1,0 +1,35 @@
+                                ######################
+                                #    Boas Práticas    #
+                                ######################
+    ->  Abstrair complexidade das requisições HTTP, para uma classe "Service". 
+        Pode-se criar um diretório "domain" e  neste um subdiretório para os modelos, exemplo "fotos"
+        O service deve receber um resource que é a BaseUrl da API, após COMPLETAR com o ENDPOINT (vi/fotos/...)
+        - domain
+            -fotos                 
+                - Foto.js         // classe
+                - FotoService.js
+                    export default class FotoService(resource){
+                        contructor(){
+                            this._resource = resource("meu_endpoint/v1/...")
+                        }
+                        lista(){
+                                return this._resource
+                                    .query/get/...
+                                    .then(res => res.json());
+                        }
+                        cadastra(foto){ ... }
+                        apaga(id){ ... }
+                    }
+
+
+
+
+
+/* Assim não precisa das chaves porque possui o "default" no export */
+export default const routes = [] 
+import routes from './diretoro/routes'
+
+/* Assim precisa das chaves porque não possui o "default" no export */
+export const routes = [] 
+import { routes } from './diretoro/routes'
+
