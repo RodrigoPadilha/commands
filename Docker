@@ -379,3 +379,8 @@ $ docker exec -i -t marcomob_web_1 /bin/bash
 
 docker run --name meu-site -d -p 80:5000 -v "/home/rodrigo/minha_pasta:/var/www"
 
+
+
+# MY_SQL
+https://hub.docker.com/_/mysql
+https://docs.docker.com/config/daemon/systemd/

@@ -92,6 +92,14 @@ para ler esses dispositivos precisamoas primeiro montar em /mnt
     Temporários do sistema que ele não garante que estea lá depois do boot
 
 
+# Applications (Meus Programas)    
+    Sistema
+        /usr/share/applications //Icones de MENU de aplicações (quando aperta tecla WINDOWS)
+    Usuário
+        /home/rodrigo/.local/share/applications
+
+
+
 /******************\
     COMANDOS
 \******************/
@@ -158,6 +166,11 @@ $ echo $PATH
 $ mount /dev/sdxx /mnt/minha_pasta
     montar partições de disco
     Exemplo: $ mount /dev/sdb1 /mnt/dados
+
+$ Limpar memória swap
+    Check space: # free -m 
+    Disable swap: # swapoff -a 
+    Enable swap: # swapon -a 
 
 /******************\
     TMUX
@@ -229,7 +242,7 @@ $ tmux
 
 /**********************************\
     Criar atalho para um programa
-\**********************************/
+\**********************************/    
     echo -e '[Desktop Entry]\n Version=1.0\n Name=xampp\n Exec=sudo /opt/lampp/manager-linux-x64.run\n Icon=/opt/lampp/icons/world1.png\n Type=Application\n Categories=Application' | sudo tee /usr/share/applications/xampp.desktop
 
 

@@ -1,0 +1,5 @@
+
+rm -rf node_modules yarn.lock package-lock.json
+yarn cache clean
+yarn install
+yarn start --reset-cache

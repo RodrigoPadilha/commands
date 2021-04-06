@@ -87,8 +87,29 @@ pacman -S --noconfirm chromium gimp inkscape git youtube-dl
     # git clone https://aur.archlinux.org/visual-studio-code-bin.git
     # makepkg -si    
     
-    # git clone https://aur.archlinux.org/android-studio.git
-    # makepkg -si
+    # Android Studio
+        # Download do site
+        # Descompactar com "$ tar -vxzf android-studio..." para o diretório "/opt/android-studio"
+        # ou            
+        # git clone https://aur.archlinux.org/android-studio.git
+        # makepkg -si
+
+    # React & React Native
+        # Android Studio
+        # NodeJS
+        # Download Java (até versão 11)
+        # Descompactar com "$ tar -vxzf android-studio..." para o diretório "/opt/android-studio"
+        # Variáveis de ambiente
+            # nano ~/.bashrc
+                # export ANDROID_HOME=$HOME/Android/Sdk
+                # export PATH=$PATH:$ANDROID_HOME/emulator
+                # export PATH=$PATH:$ANDROID_HOME/tools
+                # export PATH=$PATH:$ANDROID_HOME/tools/bin
+                # export PATH=$PATH:$ANDROID_HOME/platform-tools
+                
+                # export JAVA_HOME=/opt/jdk-11.0.9
+                # export PATH=$JAVA_HOME/bin:$PATH
+
 
     # https://aur.archlinux.org/insomnia.git
     # makepkg -si

@@ -1,0 +1,67 @@
+{
+  "currentStep": 2, 
+  "data": {
+    "cpf": "37827135080", 
+    "dateOfBirth": 1987-12-28T02:00:00.000Z, 
+    "email": "rodrigo.santos@focco.com.br", 
+    "gender": "Male", 
+    "name": "Rodrigo Padilha", 
+    "password": "Password12345", 
+    "passwordConfirmation": "Password12345", 
+    "phone": "54981493355", 
+    "thirdPartyAuth": undefined
+	}  
+}
+
+##############
+# PLAYGROUND #
+##############
+
+mutation CreateUser(
+  $email: String!
+  $password: String
+  $name: String!
+  $phone: String!
+  $cpf: String!
+  $genre: Genre!
+  $role: Role!
+  $thirdParty: ThirdPartyAuthInput
+) {
+  createUser(
+    newUserInput: {
+      email: "rodrigo.santos@focco.com.br"
+      password: "Pass@123456"
+      phone: "54981111111"
+      name: "Rodrigo Padilha"
+      role: Patient
+      cpf: "37827135080"
+      genre: Male
+      thirdParty: null
+    }
+  ) {
+    success
+    message
+    loginToken
+  }
+}
+
+###########
+    OU
+###########
+{
+  createUser(
+    newUserInput: {
+      email: "rodrigo.santos@focco.com.br"
+      password: "Pass@123456"
+      phone: "54981111111"
+      name: "Rodrigo Padilha"
+      role: Patient
+      cpf: "37827135080"
+      genre: Male
+      thirdParty: null
+    }
+  ) {
+    success
+    message
+    loginToken
+  }

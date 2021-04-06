@@ -1,6 +1,12 @@
 # config global de user e pass
 	git config --global user.name "rodrigo"
-	git config --global user.email "rodriog.gts"
+	git config --global user.email "rodrigo.gts"
+
+# config local de user e pass
+	git config user.name "Your Name Here"
+	git config user.email your@email.com
+
+	???? Salvar user e Pass -> git config credential.helper store
 
 
 # precisa estar no diretório do projeto local
@@ -12,6 +18,15 @@
 # Adicionar repositório remoto
 	git remote add Nome_Do_Repo Caminho_Do_Repo
 	git remote add orign http://url_do_meu_projeto
+
+# Subir um projeto existente para o github
+	Criar projeto no github
+	Entrar na pasta do projeto criado
+		git init  	
+		git add .
+		git commit -m "Primeiro commit"
+		git remote add origin https://github.com/RodrigoPadilha/meu_projeto.git
+		git push origin master
 
 # Lista Diretórios remotos
 	git remote

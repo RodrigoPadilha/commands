@@ -1,0 +1,15 @@
+sudo snap install mysql-workbench-community
+
+docker run --name MySQL_dev2 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=Kepler@123 -d mysql
+
+docker exec -it MySQL_dev bash
+
+mysql -u root -p
+
+
+
+
+Hostname: localhost
+Port: 3306
+Username: root
+Pasword: Kepler@123

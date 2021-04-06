@@ -1,0 +1,31 @@
+# Diretório para instalação no Linux 
+    /opt/android-studio
+
+# Arquivo de variáveis de ambiente 
+    nano ~/.bashrc
+        export ANDROID_HOME=$HOME/Android/Sdk
+        export PATH=$PATH:$ANDROID_HOME/emulator
+        export PATH=$PATH:$ANDROID_HOME/tools
+        export PATH=$PATH:$ANDROID_HOME/tools/bin
+        export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+        export JAVA_HOME=/usr/lib/jvm/java-14-openjdk
+
+        echo $JAVA_HOME
+        echo $ANDROID_HOME
+
+
+# Verificar permissões do projeto (React Native)
+    chmod -R a+rwx MSC-Teletriagem%20-%20Frontend/
+
+
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22b8", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-usb.rules
+
+adb devices
+
+sudo pacman -S usbutils
+    -> lsusb
+
+emulator -list-avds
+
+$ANDROID_HOME/emulator/emulator -avd Pixel_2_API_29

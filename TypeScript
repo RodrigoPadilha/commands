@@ -1,0 +1,162 @@
+-> Node não entende a sintaxe "import ... from ..."
+
+############################
+# CRIAR PROJETO TYPESCRIPT #
+############################
+mkdir FOLDER && cd FOLDER
+mkdir src
+mkdir src/@types
+# Criar o arquivo ".gitignore" e adicionar:
+    .gitignore
+        node_modules 
+        dist
+$ git init
+$ yarn init -y
+$ yarn add typescript --D
+$ yarn add ts-node-dev -D
+$ yarn add tsconfig-paths -D
+    package.json 
+        -> "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts",
+        -r tsconfig-paths/register  // Faz o mapeamento dos PATHS configurados no tsconfig.json para que o ts-node-dev entenda
+        --respawn           // Restart total a cada Save
+        --transpile-only    // Não procure erros de sintaxe na execução do código
+        --ignore-watch node_modules // Não observa alterações do node_modules
+        --no-notify         // Não exibe mensagem no linux a cada Save
+
+$ yarn tsc --init
+    tsconfig.json
+        "target": "es2017",     // Versão do EcmaScript
+        "module": "commonjs",
+        "lib": [es6],           // ...???
+        "allowJs": true,        // Permite importar arquvio Javascript dentro de arquivos TypeScript
+        "outDir": "./dist",     // Pasta para o build da aplicação
+        "rootDir": "./src",     // Local onde ficam os arquivos TypeScript
+        "removeComments": true, // Remove comentários durante o build
+        "strict": true,         // Força o uso de tipagem em tudo (não pode retornar null de função qtipada para retornar string)
+        "typeRoots":[           // Permite sobrscrever tipagem de outras bibliotecas
+            ".src/@types"
+        ]
+        "esModuleInterop": true,
+        "resolveJsonModule": true,  // Permite importar arquivos JSON dentro do código
+        //Atalhos de PATH
+        "baseUrl": ".",             // Caminho inicial para o path fazer o mapeamento
+        "path":{                    
+            "~/*": ["/src/*"],      // Mapeia src exemplo projeto FOCCO
+            "@models/*": ["./src/models/*"]       // Sempre que um import iniciar com "@models" é feito um mapeamento para o caminho do array
+        }
+        "experimentalDecorators": true,             // Habilita o uso de Decorators em ORM's por exemplo
+        "forceConsistentCasingInFileNames": true,   // Habilita o uso de Decorators em ORM's por exemplo
+        "include":["src/**/*"]                      // Configuração do Jest para poder fazer o import do tsconfig.json em jest.config.js
+                                                    // Faz com que o TypeScript não compile o arquivo jest.config.js
+
+
+#################
+# CONFIG ESLINT #
+#################
+yarn add eslint -D
+yarn eslint --init // Terceir opção - Primeira opção - None of this - Yes - Node - Airbnb - JSON - No
+#yarn add **COPIAR E COLIAR EXCETO o Eslint** -D
+yarn add @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint-plugin-import@^2.22.1 @typescript-eslint/parser@latest -D
+Opcional:
+    Habilitar as correções automáticas quando salvar arquivos 
+        settings.json ->  {... "editor.codeActionOnSave":{ "source.fixAll.eslint": true } ...}
+
+###############
+# CONFIG JEST #
+###############
+yarn add jest -D
+yarn jest --init
+yarn add ts-jest -D     // Para o Jest funcionar com o TypeScript
+yarn add @types/jest -D
+# Configurar no .eslintrc.json
+    "env":{
+        "jest": true    // Add essa linha para que  não seja apresentado erros em palavras como "expected", etc
+    }
+# Editar o arquivo jest.config.json
+    const {compilerOptions} = require('./tsconfig.json');
+    const {pathsToModuleNameMapper} = require('ts-jest/utils');     // Converte os PATHS definidos no tsconfig.json par ao Jest
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),    // Mapeamento dos caminhos Path
+    preset: 'ts-jest'
+mkdir __tests__
+
+################
+# CONFIG BABEL #
+################
+$ yarn add -D @babel/cli @babel/core @babel/node @babel/preset-typescript babel-plugin-module-resolver
+$ touch .eslintignore -> dist /*.js
+$ touch babel.config.js
+# Cria o arquivos ".eslintignore" e adicionar:
+    .eslintignore
+        dist    // Para não ficar acusando erros
+        /.js    // Ignorar arquvios Javascript para não acusar erros
+# Configurar o Babel
+    babel.config.js
+        module.exports = {
+            presets: [
+                [
+                '@babel/preset-env',
+                {
+                    targets: {
+                    node: 'current'     // Essa configuração faz a conversão para node na versão current (instalada atualmente)
+                    }
+                }
+                ],
+                '@babel/preset-typescript'  // Preset do TypeScript para entender o código em ".ts"
+            ],
+            plugins: [
+                ['module-resolver', {
+                    alias: {
+                        src: './src'                    
+                        '@models': './src/models'        // Paths configurados no tsconfig.json
+                    }
+                }]
+            ],
+            ignore: [
+                '**/*.spec.ts'
+            ]
+        }
+# Configurar o script de build     
+    package.json
+        "build": "babel src --extensions \".js,.ts\" --out-dir dist --compy-files --no-copy-ignored"
+            src pasta onde estão os arquivos que devem ser compilados
+            --extensions \".js,.ts\"    // quais arquivos o Babel vai procurar
+            --out-dir dist              // para onde o Babel vai jogar o código compilado
+            --compy-files               // copia tudo da pasta src para a build convertendo para TypeScript
+            --no-copy-ignored           // não copia os arquivos de teste
+
+** Após o build, podemos rodar o arquivo compilado com o NODE
+    Ex: $ node dist/meu_index.js
+
+
+###########################
+# ADD OUTRAS DEPENDÊNCIAS #
+###########################
+$ yarn add express
+$ yarn add @types/express
+
+#########################
+# Exemplos package.json #
+#########################    
+    scripts{
+        "build": "babel src --extensions \".js,.ts\" --out-dir dist --compy-files --no-copy-ignored",
+        "start": "node dist/server.js",
+        "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts",
+        "test": "jest"
+    }
+
+
+Para executar um código em Typescript, precisamos:
+    1) Instalar TypeScript
+        yarn add typescript -D // Instala TypeScript em Desenvolvimento
+    2) Inicializar Typescript na aplicação
+        yarn tsc --init // Cria o tsconfig.json
+    3) Configurar Compiler do TypeScript
+        Ajustar arquivo "tsconfig.json"
+    4) Converter o mesmo para javascript (build)
+        yarn add ts-node-dev -D // Converte o código para typescript        
+    5) Rodar o código convertido com o Node(só entende Javascript)
+        Executa a função de:
+            -> tsc para converter
+            -> node que executa o código
+            -> nodemon que fica escutando as alteraçõe dos arquivos TypeScript
+        "ts-node-dev --transpile-only --ignore-watch node_modules src/index.ts" // Script package.json
