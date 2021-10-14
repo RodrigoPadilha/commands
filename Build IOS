@@ -1,0 +1,33 @@
+# Configurações do projeto
+    ## Checkout developer e master
+    ## Verificar .env
+    ## Atualizar branchs    // git pull
+    ## Verificar se existe dependencia sa serem instaladas
+        yarn
+        cd ios && pod install  // dentro da pasta ios
+
+# Abrir workspace no Xcode
+    /ios/meu_app.workpasce
+
+# Gerar build do APP no Xcode
+    ## Incrementar a versão a ser gerada    // Verificar no painel do applestore
+        Version: 0.0.xx
+        Build: 0.0.xx
+    ## Comandos do Xcode
+        Product -> Clean Build Folder
+        Product -> Build For -> Profiling   // demora...
+        Product -> Archive  //... demora um pouco tbm
+    ## Upload do build Versão
+        // Após o build será exibida uma lista de builds gerados
+        ->  Selecionar a ultima versão 
+        -> Distribute App -> 4 Nexts -> Upload
+
+# Configurações da App Store 
+    ## Aba Testfligth
+        // Aguardar o instalador ser processado
+        -> clicar no numero da versao
+        -> clicar em Fornecerinformações de conformidade de exportação
+        -> selecionar Não para Informações de conformidade de exportação
+        -> clicar em Iniciar teste interno
+        -> inserir uma descição
+        -> Salvar
