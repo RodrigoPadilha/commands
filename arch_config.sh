@@ -122,6 +122,15 @@ echo "Criando usuário rodrigo..."
 useradd -m -g users -G whell rodrigo
 echo rodrigo ALL=(ALL)ALL >> /etc/sudoers
 
+echo "Configurando módulo Bluetooth..."
+sudo pacman -Sy bluez bluez-utils gnome-bluetooth gnome-shell
+systemctl start bluetooth.service
+
+# HEADSET Microfone????
+#sudo pacman -S pavucontrol
+#pulseaudio -k
+#pulseaudio --start
+
 
 ###################
 #      GRUB       #

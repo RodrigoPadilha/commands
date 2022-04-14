@@ -1,0 +1,12 @@
+Anotações
+
+# Enviar dados para fora de um componente
+    - Usar a notação @Output
+
+# Enviar dados para dentro de um componente
+    - Usar a notação @Input
+
+# Fazer alguma coisa ao criar um componente
+    - ngOnInit(){
+        ..
+    }

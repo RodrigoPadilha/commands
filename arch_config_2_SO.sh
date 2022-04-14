@@ -38,3 +38,7 @@ echo -e "${pass}\n${pass}" | passwd rodrigo
 # Esse passo preicisa ser feito manualmente com nano pois a 
 # linha não deve ser add no final do arquivo
 echo rodrigo ALL=\(ALL\)ALL >> /etc/sudoers
+
+echo "Configurando módulo Bluetooth..."
+sudo pacman -Sy bluez bluez-utils gnome-bluetooth gnome-shell
+systemctl start bluetooth.service

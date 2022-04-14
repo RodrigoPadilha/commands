@@ -213,6 +213,17 @@ $ tmux
 
 
 /*******************\
+    Softwares AUR
+\*******************/
+# Listar Softwares AUT instalados
+    $ pacman -Qm
+# Instalar
+    $ git clone https://repositorio_do_software
+    $ makepkg -si
+# Remover
+    $ sudo pacman -Rns nome_do Software
+
+/*******************\
     Configurar SNAP
 \*******************/
     https://snapcraft.io/install/snapd/arch

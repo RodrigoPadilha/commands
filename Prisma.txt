@@ -1,0 +1,31 @@
+yarn prisma migrate dev
+
+yarn dotenv -e .env.development prisma migrate dev
+
+yarn dotenv -e .env.development prisma migrate dev --schema=./shcema.prisma --name building --create-only --help
+
+/* Enviar alterações e NÃO criar migrations*/
+yarn dotenv -e .env.development prisma db push
+
+/*SEEDS*/
+yarn dotenv -e .env.development prisma db seed
+
+/* Deleta todos os subitens do relacionamento e cria tudo de novo. Limpa os registros e repois cria atualizados
+  deleteMany: {},
+  create: model.buildings.map((item) => ({ buildingId: item.buildingId })), */
+
+/* Altera os registros que existe e cria os que não existem OBS.: Não deleta os demais registros que existem
+  upsert: model.buildings.map((item) => ({
+    create: { buildingId: item.buildingId },
+    update: { buildingId: item.buildingId },
+    where: { id: item.id },
+  })),
+*/
+
+/* Deleta vários registros
+  deleteMany: {}, 
+*/
+
+/* Sobrescreve vários registros
+  set: model.buildings.map((item) => ({ id: item.id })), 
+*/

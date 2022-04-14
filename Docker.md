@@ -1,23 +1,23 @@
 # Comandos -> docker run
 
 ## Containers
-**Listar containers**    
-    _Containers em Execução:_ `docker ps` <p>
-    _Todos containers:_ `docker ps -a`
+**Listar containers**
+    _Containers em Execução:_`docker ps`
+    _Todos containers:_`docker ps -a`
 
 **Criar um container e inicia**    
-    _Prende terminal:_ `docker run NOME_DA_IMAGEM` <p>
+    _Prende terminal:_ `docker run NOME_DA_IMAGEM`
     _Não bloqueia terminal:_ `docker run -d NOME_DA_IMAGEM`
 
 **Excluir containers**
-    _Excluir um container:_ `docker rm ID_CONTAINER` <p>
+    _Excluir um container:_ `docker rm ID_CONTAINER`
     _Excluir todos containers:_ `docker container prune`
 
 **Executamos-o sem atrelar o nosso terminal ao terminal do container**
     `docker run -d dockersamples/static-site`
 
 **Definindo configuração de portas**
-    _Porta aleatória:_ `docker run -d -P dockersamples/static-site` <p>
+    _Porta aleatória:_ `docker run -d -P dockersamples/static-site` 
     _Porta específica:_ `docker run -d -p 12345:80 dockersamples/static-site`
 
 **Nomear container**
@@ -27,16 +27,13 @@
     `docker run -d -P -e AUTHOR="Rodrigo Padilha dos santos" dockersamples/static-site`
 
 **Parar contaiers**
-    _Parar um cvontainer:_`docker stop ID_CONTAINER -t 0` <p>
+    _Parar um cvontainer:_`docker stop ID_CONTAINER -t 0`
     _Parar vários containers:_`docker stop -t 0 $(docker ps -q)`
-
-**Exibir informações sobre o container em execução**
-    `docker inspect ID_CONTAINER`
 
     
 ## Images
-**Download imagem do Docker Hub**   
-    `docker pull ubuntu`    <p>
+**Download imagem do Docker Hub**
+    `docker pull ubuntu`
     `docker pull NOME_USUARIO/NOME_IMAGEM`
 
 **Listar imagens**
@@ -44,30 +41,6 @@
 
 **Excluir imagens**
     `docker rmi ID_IMAGEM`
-
-## Volumes
-**Criar um volume no container**
-    `docker run -it -v "C:\meu_diretorio_local:/var/www/meu_diretorio_container" NOME_DA_IMAGEM_`
-
-**Listar volumes**
-    `docker volumes ls`
-
-# Criando volumes com --MOUNT
-    - target: diretório do container
-    - source
-
-    # Bind mount
-        docker ID_CONTAINER run -it --mount type=bind, source=/home/rodrigo/meu-dir/, target=/var/www
-
-    # Volume Nomeado
-        docker ID_CONTAINER run -it --mount type=bind, source=meu-volume, target=/var/www
-
-    # Temp em memória RAM (apenas no linux)
-        docker ID_CONTAINER run -it --mount type=tmpfs, target=/var/www
-
-
-
-
 
 
 
@@ -102,6 +75,15 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
 # Verifica se o docker está rodando
     sudo systemctl status docker
 
+# Cria um container e inicia
+    docker run NOME_DA_IMAGEM       // prende o terminal pois o processo do container é iniciado
+    docker run -d NOME_DA_IMAGEM    // cria container e não bloqueia terminal
+
+
+# Listar containers e informações (ID, Imagem , etc)
+    docker ps       // em execução
+    docker ps -a    // todos criados
+
 # Iniciar container
     docker start ID_DO_CONTAINER
 
@@ -109,14 +91,34 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
         o mesmo só fica em execução quando é acessado via modo interativo (Flag -it)
         para que o estado deste mude é necessário executar o comando:  'docker start ID_CONTAINER'
 
+# Parar um container
+    docker stop ID_DO_CONTAINER
+
 # Acessar terminal de um container e acessar o terminal do container
     docker start -a -i ID_DO_CONTAINER
+
+# Remover um container 
+    docker rm NOME_DA_IMAGEM
+    docker container prune  // Limpa todos os containers parados
+    docker rmi images ID_DO_CONTAINER
     
+
+
+
+# Efetua mapeamento de portas para o uso externo do container
+    docker run -d -P NOME_DA_IMAGEM  // -P para mapear uma porta aleatória
+
+# Efetua mapeamento de uma porta específica container
+    docker run -d -p 12345:80 NOME_DA_IMAGEM    // -p porta_para_acesso_extern:porta_interna_do_container
+
 # Lista portas mapeadas
     docker port
 
 # Exibe IP dos containers ativos
     docker-machine ip
+
+# Nomear um container
+    docker-run -d -P --name meu-container NOME_DA_IMAGEM    // --name é o parametro para setar um nome no container
 
 # Criar Variável de ambiente
     docker run -d -P -e AUTHOR = "Rodrifo Padilha dos Snatos" NOME_DA_IMAGEM    // -e nome_da_variavel
@@ -151,6 +153,9 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
 #### VOLUMES ####
 #################
 
+# Listar volumes 
+    docker volumes ls
+
 # Criando Volumes (FORMA ANTIGA, a documentação indica para usar o "--mount")
     -> Mapeia uma pasta específica do Host para Container (BindMount)
         Armazena em um caminho absoluto do Host e em uma pasta dentro do container
@@ -164,6 +169,20 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
         Armazena em uma pasta específica do Docker dentro do Host mas aparece na lista de volumes (docker volumes ls)
             docker volume create meu_volume
             docker ID_CONTAINER run -it -v meu_volume:/pasta_do_container
+
+
+# Criando volumes com --MOUNT
+    - target: diretório do container
+    - source
+
+    # Bind mount
+        docker ID_CONTAINER run -it --mount type=bind, source=/home/rodrigo/meu-dir/, target=/var/www
+
+    # Volume Nomeado
+        docker ID_CONTAINER run -it --mount type=bind, source=meu-volume, target=/var/www
+
+    # Temp em memória RAM (apenas no linux)
+        docker ID_CONTAINER run -it --mount type=tmpfs, target=/var/www
 
 
 
