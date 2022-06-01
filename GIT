@@ -68,6 +68,10 @@
 que reverte a alteração anterior 
 	git revert hash_de_um_Commit 
 
+# Desfazer último commit sem perder os arquivos alterados. Coloca os arquivos como "staged"(esperando ser comitados)
+Ex.: quando adiciona um arquivo e comita por engano
+	git reset --soft HEAD~1
+
 # Armazenar alterações em um projeto (sem fazer comite)
 	git stash
 
