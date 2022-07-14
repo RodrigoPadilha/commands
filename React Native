@@ -85,3 +85,20 @@ sdk.dir = /Users/USERNAME/Library/Android/sdk
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 
+# BUILD EXPO
+
+## Android
+
+## IOS
+
+Incrementer as versões do `app.json`
+- version
+- buildNumber
+
+eas build --platform ios
+eas submit -p ios --latest
+
+Via CodePush
+expo publish
+
+
