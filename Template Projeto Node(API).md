@@ -181,7 +181,7 @@ Habilitar as correções automáticas quando salvar arquivos:
 ## Instalar JEST
 ```
   yarn add jest -D
-  yarn add ts-jest -D     // Para o Jest funcionar com o TypeScript
+  yarn add ts-jest -D     // Para o Jest funcionar com o TypeScript convertendo o código para javascript
   yarn add @types/jest -D
 ```
 
