@@ -1,7 +1,7 @@
 # Comandos -> docker run
 
 ## Containers
-** Listar containers**
+**Listar containers**
     _Containers em Execução:_`docker ps`
     _Todos containers:_`docker ps -a`
 
