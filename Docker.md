@@ -1,48 +1,216 @@
-# Comandos -> docker run
+***
 
-## Containers
-**Listar containers**
-    _Containers em Execução:_`docker ps`
-    _Todos containers:_`docker ps -a`
+# 1. Containers
+##  Executar containers
+### Listar containers criados
+```
+docker ps       // lista containers em execução
+docker ps -a    // lista todos containers criados
+```
 
-**Criar um container e inicia**    
-    _Prende terminal:_ `docker run NOME_DA_IMAGEM`
-    _Não bloqueia terminal:_ `docker run -d NOME_DA_IMAGEM`
+### Faz doanload de imagem, cria e executa container 
+```
+docker run NOME_DA_IMAGEM
+docker run NOME_DA_IMAGEM COMANDO_PARA_EXECUTAR
+docker run -d NOME_DA_IMAGEM    // Inicia sem travar o terminal
+```
+`-d`: detached
 
-**Excluir containers**
-    _Excluir um container:_ `docker rm ID_CONTAINER`
-    _Excluir todos containers:_ `docker container prune`
+### Executar container com nome
+```
+docker run -d -P --name MEU_CONTAINER NOME_DA_IMAGEM
+```
 
-**Executamos-o sem atrelar o nosso terminal ao terminal do container**
-    `docker run -d dockersamples/static-site`
+### Executar container com mapeamento de portas
+```
+docker run -d -p 8080:80 NOME_DA_IMAGEM
+```
 
-**Definindo configuração de portas**
-    _Porta aleatória:_ `docker run -d -P dockersamples/static-site` 
-    _Porta específica:_ `docker run -d -p 12345:80 dockersamples/static-site`
+`-p`: faz mapemento de portas **external_port** : **internal_port**
 
-**Nomear container**
-    `docker run -d -P --name meu-site dockersamples/static-site`
+```
+docker run -d -P dockersamples/static-site
+```
+`-P`: faz mapeamento de porta **aleatória** : 
+
+### Iniciar, parar e pausar um container 
+```
+docker start ID_CONTAINER
+docker stop ID_CONTAINER
+docker stop ID_CONTAINER -t=0
+docker stop ID_CONTAINER -t 0       // Parar um container
+docker stop -t 0 $(docker ps -q)    // Parar vários containers
+```
+`-t`: tempo para pausar container
+
+```  
+docker pause ID_CONTAINER
+docker unpause ID_CONTAINER
+```
+
+## Remover containers
+```
+docker rm ID_CONTAINER                          // Excluir um container
+docker rm ID_CONTAINER --force
+docker container prune                          // Excluir todos containers
+docker rm $(docker container ps -aq) --force    // Remover todos os containers
+```
+
+## Executar um comando em um container que está em execução
+```
+docker exec -it ID_CONTAINER bash   // Acessar de modo iterativo (terminal do linux)
+```
+`-it`: iterativo
+
+`bash`: comando para executar o terminal 
+
+
+## Exibir informações de um container
+```
+docker inspect  ID_CONTAINER    // Exibe diversas informações sobre um container
+docker port     ID_CONTAINER    // Exibir mapeamento de portas de um container
+```
+
+***
+
+# 2. Imagens
+```
+docker images                       // Lista imagens baixadas 
+docker pull NOME_DA_IMAGEM          // Download de imagem do 
+docker rmi  NOME_DA_IMAGEM          // Exclui uma imagem 
+docker history  NOME_DA_IMAGEM      // Exibe camadas que compõe uma imagem
+```
+
+***
+
+# 3. Docker File
+Docker file: build 
+        -> Imagem: run 
+                -> conatiner
+```
+    FROM Node:14
+    WORKDIR /app-node
+    ARG PORT_BUILD=6000     // Utilzado na construção da imagem
+    ENV PORT=PORT_BUILD     // Utilizado nas variáveis de ambiente do conatiner
+    EXPOSE 3000             // Documenta a porta a ser utilizada
+    COPY . .                // PATH_LOCAL  PATH_CONTAINER
+    RUN npm install
+    ENTRYPOINT npm start
+```
+
+***
+
+# 4. Docker Hub
+O nome da imagem(Repository) precisa ser no padrão do docker hub:
+`LOGIN_DOCKER_HUB/NOME_DA_IMAGEM`
+Exemplo: `aluradocker/app-node:1.0`
+```
+docker login -u SEU_USUARIO     // Faz login no Docker Hub
+docker push NOME_DA_IMAGEM      // Faz upload da imagem para docker hub
+```
+
+***
+
+# 5. Persistindo dados
+## Bind Mount
+> **`!!!ATENÇÃO!!!`** 
+>
+> A forma correta/indicada de configurar a persistência de dados é utilizando Volumes ao invés de diretórios e pastas
+```
+docker run -it -v /home/rodrigo/volume-docker:/app NOME_DA_IMAGEM bash
+```
+`-v`: faz mapemento de um diretório **external_path** : **internal_path**
+
+```
+docker run -it --mount type=bind, source=/home/rodrigo/volume-docker,target=/app NOME_DA_IMAGEM bash
+```
+`--mount`: indica que será utilizado o mapemento de um diretório 
+
+`type`: tipo de mapeamento
+
+`source`: indica um diretório externo (do host)
+
+`target`: indica um diretório interno (do container)
+
+
+## Volumes
+> Volumes são gerenciados pelo Docker e independem da estrutura de pastas do sistema.
+```
+docker volume ls                                            // Listar volumes
+docker volume create NOME_DO_VOLUME                         // Criar um volume
+docker run -it -v NOME_DO_VOLUME:/app NOME_DA_IMAGEM bash   // Configura Volume no container
+docker run -it --mount, source=NOME_DO_VOLUME,target=/app NOME_DA_IMAGEM bash   // Configura Volume no container
+```
+> Os dados são armazenaos no diretório do docker:
+> `/var/lib/docker/volumes/NOME_DO_VOLUME/_data`
+## TMPFS
+```
+docker run -it --tmpfs=/app NOME_CONTAINER bash
+```
+`--tmpfs`: cria uma pasta temporária que salva os dados no host mas não será acessível quando outro container for criado
+
+***
+
+# 6. Network
+```
+docker network ls       // Lista redes existentes do docker
+```
+
+
+## Rede Bridge
+```
+docker network create --driver bridge NOME_MINHA_REDE   // Cria uma rede bridget
+
+docker run -it --name MEU_CONTAINER --network create --driver bridge NOME_MINHA_REDE    // Cria container e inclui em uma rede
+``` 
+* Utilizar nome do container que é a informação maios estável do container
+* A rede bridget provê a resoluçãod e DNS entre os containers, desta forma os containers podem se comunicar através do nome do container
+
+
+## Rede Host
+* A rede host remove o isolamento entre o container e o sistema;
+* Quando um container é criado com este driver, não é encessário fazer um mapeamento de portas, pois utiliza a interface do host para se comunicar;
+* Isso impede que duas aplicações sejam executadas na mesma máquina caso ambas utilizem a mesma porta.
+
+
+## Rede Null
+* A rede none remove a interface de rede;
+* Um container é criado sem uma interface de rede.
 
 **Declarar variável de ambienbte**
     `docker run -d -P -e AUTHOR="Rodrigo Padilha dos santos" dockersamples/static-site`
-
-**Parar contaiers**
-    _Parar um cvontainer:_`docker stop ID_CONTAINER -t 0`
-    _Parar vários containers:_`docker stop -t 0 $(docker ps -q)`
-
     
-## Images
-**Download imagem do Docker Hub**
-    `docker pull ubuntu`
-    `docker pull NOME_USUARIO/NOME_IMAGEM`
+## Exemplo de Implementação de Containers em Rede
+### 1) Criar Network
+```
+docker network create --driver bridge minha-bridge
+```
+### 2) Criar container do banco de dados
+> Vai adicionar na Rede criada na etapa anterior
+> Vai setar o nome par ao cotainer no container, esse nome deverá ser configurado na configuração da connection do banco
+```
+docker run -d --network minha-bridge --name meu-mongo mongo:4.4.6
+```
+### 3) Criar container da aplicação
+> Vai adicionar na rede criada na etapa 1
+> Vai setar o nome no container
+> Vai mapear a porta para acesso da aplicação
+```
+docker run -d --network minha-bridge --name alurabooks –p 3000:3000 aluradocker/alura-books:1.0
+```
 
-**Listar imagens**
-    `docker images`
+***
+# Docker Compose
+> **`!!!ATENÇÃO!!!`** 
+> O docker compose é uma ferramenta de coordenação de containers
+> que precisa ser instalada a parte do docker:
+<https://docs.docker.com/compose/install/>
 
-**Excluir imagens**
-    `docker rmi ID_IMAGEM`
-
-
+```
+docker-compose up
+docker-compose down
+docker-compose ps
+```
 
 
 
@@ -80,9 +248,6 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
     docker run -d NOME_DA_IMAGEM    // cria container e não bloqueia terminal
 
 
-# Listar containers e informações (ID, Imagem , etc)
-    docker ps       // em execução
-    docker ps -a    // todos criados
 
 # Iniciar container
     docker start ID_DO_CONTAINER
@@ -146,7 +311,7 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
     docker run -p 8080:3000 -v "$(pwd):/var/www" -w "/var/www" node npm start // flag w direciona para iniciar em uma pasta específica
 
 # Exibir informações do container
-    docker inspect ?NOME_DO_CONTAINER?
+    docker inspect NOME_DO_CONTAINER
 
 
 ## VOLUMES
