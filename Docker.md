@@ -1,7 +1,7 @@
 # Comandos -> docker run
 
 ## Containers
-**Listar containers**
+** Listar containers**
     _Containers em Execução:_`docker ps`
     _Todos containers:_`docker ps -a`
 
@@ -149,9 +149,8 @@ docker start ID_CONTAINER -a -i             -> iniciar container e acessa termin
     docker inspect ?NOME_DO_CONTAINER?
 
 
-#################
-#### VOLUMES ####
-#################
+## VOLUMES
+
 
 # Listar volumes 
     docker volumes ls
